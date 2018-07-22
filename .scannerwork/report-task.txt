@@ -1,0 +1,7 @@
+organization=ulboralabs
+projectKey=UlboraCmsAdmin
+serverUrl=https://sonarcloud.io
+serverVersion=7.3.0.14089
+dashboardUrl=https://sonarcloud.io/dashboard?id=UlboraCmsAdmin
+ceTaskId=AWTEFXGA7wfD5mWBTaAT
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AWTEFXGA7wfD5mWBTaAT

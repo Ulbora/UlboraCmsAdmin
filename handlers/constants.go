@@ -38,5 +38,6 @@ const (
 	authCodeState       = "ghh66555h"
 	authCodeRedirectURI = "/tokenHandler"
 	implicitRedirectURI = "/tokenImplicitHandler"
-	//gwAPIKey            = "TDjlPxNIUkqxeovPbVwQEdleWOgPqBpWZSS"
+	apiGatewayClient    = "616"
+	apiGatewayKey       = "TDjlPxNIUkqxeovPbVwQEdleWOgPqBpWZSS"
 )

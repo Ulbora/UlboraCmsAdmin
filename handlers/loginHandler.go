@@ -105,30 +105,30 @@ func (h *Handler) handleImplicitToken(w http.ResponseWriter, r *http.Request) {
 	token := r.URL.Query().Get("token")
 	state := r.URL.Query().Get("state")
 	//fmt.Println("handle token")
-	if state == authCodeState {
-		if token != "" {
-			fmt.Println(token)
-			//token = resp
-			session := h.getSession(w, r)
-			// if err != nil {
-			// 	fmt.Println(err)
-			// 	http.Error(w, err.Error(), http.StatusInternalServerError)
-			// } else {
-			//session.Values["clientId"] = "616"
-			//session.Values["testBool"] = true
-			session.Values["userLoggenIn"] = true
-			var accKey = generateTokenKey()
-			session.Values["accessTokenKey"] = accKey
-			var resp oauth2.Token
-			resp.AccessToken = token
-			h.TokenMap[accKey] = &resp
-			//fmt.Print("session id: ")
-			//fmt.Println(session.ID)
-			err := session.Save(r, w)
-			fmt.Println(err)
-			http.Redirect(w, r, "/oauth2", http.StatusFound)
-			// decode token and get user id
-			//}
-		}
+	if state == authCodeState && token != "" {
+		//if token != "" {
+		fmt.Println(token)
+		//token = resp
+		session := h.getSession(w, r)
+		// if err != nil {
+		// 	fmt.Println(err)
+		// 	http.Error(w, err.Error(), http.StatusInternalServerError)
+		// } else {
+		//session.Values["clientId"] = "616"
+		//session.Values["testBool"] = true
+		session.Values["userLoggenIn"] = true
+		var accKey = generateTokenKey()
+		session.Values["accessTokenKey"] = accKey
+		var resp oauth2.Token
+		resp.AccessToken = token
+		h.TokenMap[accKey] = &resp
+		//fmt.Print("session id: ")
+		//fmt.Println(session.ID)
+		err := session.Save(r, w)
+		fmt.Println(err)
+		http.Redirect(w, r, "/oauth2", http.StatusFound)
+		// decode token and get user id
+		//}
+		//}
 	}
 }

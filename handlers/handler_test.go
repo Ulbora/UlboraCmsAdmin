@@ -160,3 +160,85 @@ func TestHandler_getSession2(t *testing.T) {
 		t.Fail()
 	}
 }
+
+func TestHandler_getContentHost(t *testing.T) {
+	host := getContentHost()
+	if host != "http://localhost:3011/content" {
+		t.Fail()
+	}
+}
+
+func TestHandler_getContentHost2(t *testing.T) {
+	os.Setenv("API_GATEWAY_HOST", "12345")
+	host := getContentHost()
+	if host != "12345/content" {
+		t.Fail()
+	}
+	os.Setenv("API_GATEWAY_HOST", "")
+}
+
+func TestHandler_getContentHost3(t *testing.T) {
+	os.Setenv("CONTENT_HOST", "123456")
+	host := getContentHost()
+	if host != "123456" {
+		t.Fail()
+	}
+	os.Setenv("CONTENT_HOST", "")
+}
+
+func TestHandler_getGatewayAPIClient(t *testing.T) {
+	host := getGatewayAPIClient()
+	if host != "616" {
+		t.Fail()
+	}
+}
+
+func TestHandler_getGatewayAPIClient2(t *testing.T) {
+	os.Setenv("GATEWAY_API_CLIENT", "12345")
+	host := getGatewayAPIClient()
+	if host != "12345" {
+		t.Fail()
+	}
+	os.Setenv("GATEWAY_API_CLIENT", "")
+}
+
+func TestHandler_getGatewayAPIKey(t *testing.T) {
+	k := getGatewayAPIKey()
+	if k != "TDjlPxNIUkqxeovPbVwQEdleWOgPqBpWZSS" {
+		t.Fail()
+	}
+}
+
+func TestHandler_getGatewayAPIKey2(t *testing.T) {
+	os.Setenv("GATEWAY_API_KEY", "12345")
+	host := getGatewayAPIKey()
+	if host != "12345" {
+		t.Fail()
+	}
+	os.Setenv("GATEWAY_API_KEY", "")
+}
+
+func TestHandler_getImageHost(t *testing.T) {
+	host := getImageHost()
+	if host != "http://localhost:3011/image" {
+		t.Fail()
+	}
+}
+
+func TestHandler_getImageHost2(t *testing.T) {
+	os.Setenv("API_GATEWAY_HOST", "12345")
+	host := getImageHost()
+	if host != "12345/image" {
+		t.Fail()
+	}
+	os.Setenv("API_GATEWAY_HOST", "")
+}
+
+func TestHandler_getImageHost3(t *testing.T) {
+	os.Setenv("IMAGE_HOST", "123456")
+	host := getImageHost()
+	if host != "123456" {
+		t.Fail()
+	}
+	os.Setenv("IMAGE_HOST", "")
+}

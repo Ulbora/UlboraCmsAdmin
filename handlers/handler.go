@@ -26,7 +26,7 @@ package handlers
 */
 
 import (
-	services "UlboraCmsV3/services"
+	services "UlboraCmsAdmin/services"
 	"fmt"
 	usession "github.com/Ulbora/go-better-sessions"
 	oauth2 "github.com/Ulbora/go-oauth2-client"
@@ -101,4 +101,50 @@ func (h *Handler) getSession(w http.ResponseWriter, r *http.Request) *sessions.S
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 	return session
+}
+
+func getContentHost() string {
+	var rtn = ""
+	if os.Getenv("API_GATEWAY_HOST") != "" {
+		rtn = os.Getenv("API_GATEWAY_HOST")
+		rtn = rtn + "/content"
+	} else if os.Getenv("CONTENT_HOST") != "" {
+		rtn = os.Getenv("CONTENT_HOST")
+	} else {
+		rtn = "http://localhost:3011/content"
+	}
+	return rtn
+}
+
+func getGatewayAPIClient() string {
+	var rtn = ""
+	if os.Getenv("GATEWAY_API_CLIENT") != "" {
+		rtn = os.Getenv("GATEWAY_API_CLIENT")
+	} else {
+		rtn = apiGatewayClient
+	}
+	return rtn
+}
+
+func getGatewayAPIKey() string {
+	var rtn = ""
+	if os.Getenv("GATEWAY_API_KEY") != "" {
+		rtn = os.Getenv("GATEWAY_API_KEY")
+	} else {
+		rtn = apiGatewayKey
+	}
+	return rtn
+}
+
+func getImageHost() string {
+	var rtn = ""
+	if os.Getenv("API_GATEWAY_HOST") != "" {
+		rtn = os.Getenv("API_GATEWAY_HOST")
+		rtn = rtn + "/image"
+	} else if os.Getenv("IMAGE_HOST") != "" {
+		rtn = os.Getenv("IMAGE_HOST")
+	} else {
+		rtn = "http://localhost:3011/image"
+	}
+	return rtn
 }

@@ -64,7 +64,7 @@ func (h *Handler) removeToken(w http.ResponseWriter, r *http.Request) {
 }
 
 func getOauthHost() string {
-	var rtn = ""
+	var rtn string
 	if os.Getenv("AUTH_HOST") != "" {
 		rtn = os.Getenv("AUTH_HOST")
 	} else {
@@ -74,7 +74,7 @@ func getOauthHost() string {
 }
 
 func getOauthRedirectHost() string {
-	var rtn = ""
+	var rtn string
 	if os.Getenv("AUTH_REDIRECT_HOST") != "" {
 		rtn = os.Getenv("AUTH_REDIRECT_HOST")
 	} else {
@@ -104,7 +104,7 @@ func (h *Handler) getSession(w http.ResponseWriter, r *http.Request) *sessions.S
 }
 
 func getContentHost() string {
-	var rtn = ""
+	var rtn string
 	if os.Getenv("API_GATEWAY_HOST") != "" {
 		rtn = os.Getenv("API_GATEWAY_HOST")
 		rtn = rtn + "/content"
@@ -117,7 +117,7 @@ func getContentHost() string {
 }
 
 func getGatewayAPIClient() string {
-	var rtn = ""
+	var rtn string
 	if os.Getenv("GATEWAY_API_CLIENT") != "" {
 		rtn = os.Getenv("GATEWAY_API_CLIENT")
 	} else {
@@ -127,7 +127,7 @@ func getGatewayAPIClient() string {
 }
 
 func getGatewayAPIKey() string {
-	var rtn = ""
+	var rtn string
 	if os.Getenv("GATEWAY_API_KEY") != "" {
 		rtn = os.Getenv("GATEWAY_API_KEY")
 	} else {
@@ -137,7 +137,7 @@ func getGatewayAPIKey() string {
 }
 
 func getImageHost() string {
-	var rtn = ""
+	var rtn string
 	if os.Getenv("API_GATEWAY_HOST") != "" {
 		rtn = os.Getenv("API_GATEWAY_HOST")
 		rtn = rtn + "/image"

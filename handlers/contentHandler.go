@@ -27,6 +27,7 @@ package handlers
 
 import (
 	services "UlboraCmsAdmin/services"
+	"fmt"
 	"strconv"
 	"strings"
 	//"fmt"
@@ -143,9 +144,116 @@ func (h *Handler) handleNewContent(w http.ResponseWriter, r *http.Request) {
 			// c.Host = getContentHost()
 			// c.PageSize = 100
 			// c.ClearPage(category)
-			http.Redirect(w, r, "/admin/main", http.StatusFound)
+			http.Redirect(w, r, "/", http.StatusFound)
 		} else {
-			http.Redirect(w, r, "/admin/addContent", http.StatusFound)
+			http.Redirect(w, r, "/addContent", http.StatusFound)
+		}
+	}
+}
+
+func (h *Handler) handleUpdateContent(w http.ResponseWriter, r *http.Request) {
+	h.Sess.InitSessionStore(w, r)
+	session := h.getSession(w, r)
+	loggedIn := session.Values["userLoggenIn"]
+	token := h.getToken(w, r)
+	if loggedIn == nil || loggedIn.(bool) == false || token == nil {
+		h.loginImplicit(w, r)
+	} else {
+		clientID := session.Values["clientId"].(string)
+		idStr := r.FormValue("id")
+		id, _ := strconv.ParseInt(idStr, 10, 0)
+		// if errID != nil {
+		// 	fmt.Print(errID)
+		// }
+		//fmt.Print("id: ")
+		//fmt.Println(id)
+
+		content := r.FormValue("content")
+		//fmt.Print("content: ")
+		//fmt.Println(content)
+
+		title := r.FormValue("title")
+		//fmt.Print("title: ")
+		//fmt.Println(title)
+
+		author := r.FormValue("author")
+		//fmt.Print("author: ")
+		//fmt.Println(author)
+
+		category := r.FormValue("category")
+		category = strings.Replace(category, " ", "", -1)
+		//fmt.Print("category: ")
+		//fmt.Println(category)
+
+		sortOrder := r.FormValue("sortOrder")
+		if sortOrder == "" {
+			sortOrder = "0"
+		}
+		//fmt.Print("sortOrder: ")
+		//fmt.Println(sortOrder)
+
+		metaKeyWords := r.FormValue("metaKeyWords")
+		//fmt.Print("metaKeyWords: ")
+		//fmt.Println(metaKeyWords)
+
+		desc := r.FormValue("desc")
+		//fmt.Print("desc: ")
+		//fmt.Println(desc)
+
+		archived := r.FormValue("archived")
+		//fmt.Print("archived: ")
+		//fmt.Println(archived)
+
+		var ct services.Content
+		ct.ID = id
+		ct.Text = content
+		ct.Title = title
+		ct.MetaAuthorName = author
+		ct.Category = category
+		ct.MetaKeyWords = metaKeyWords
+		ct.MetaRobotKeyWords = metaKeyWords
+		ct.MetaDesc = desc
+		ct.SortOrder, _ = strconv.Atoi(sortOrder)
+		// if err != nil {
+		// 	fmt.Print("sortOrder conversion error: ")
+		// 	fmt.Println(err)
+		// }
+		if archived == "on" {
+			ct.Archived = true
+		} else {
+			ct.Archived = false
+		}
+
+		var c services.ContentService
+		c.ClientID = clientID
+		c.APIClient = getGatewayAPIClient()
+		c.APIKey = getGatewayAPIKey()
+		// c.UserID = getHashedUser()
+		// c.Hashed = "true"
+		c.Token = token.AccessToken
+		c.Host = getContentHost()
+
+		var res *services.Response
+
+		res = c.UpdateContent(&ct)
+		// if res.Code == 401 {
+		// 	// get new token
+		// 	getRefreshToken(w, r)
+		// 	res = c.UpdateContent(&ct)
+		// }
+		//fmt.Println(res)
+		if res.Success || testMode {
+			// var c services.ContentPageService
+			// c.ClientID = getAuthCodeClient()
+			// c.APIKey = getGatewayAPIKey()
+			// c.Token = token.AccessToken
+			// c.Host = getContentHost()
+			// c.PageSize = 100
+			// c.ClearPage(category)
+			http.Redirect(w, r, "/", http.StatusFound)
+		} else {
+			fmt.Println("Content update failed")
+			http.Redirect(w, r, "/", http.StatusFound)
 		}
 	}
 }

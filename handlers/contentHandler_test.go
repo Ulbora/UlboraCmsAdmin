@@ -101,3 +101,66 @@ func TestHandler_handleNewContent3(t *testing.T) {
 	h.handleNewContent(w, r)
 	testMode = false
 }
+
+func TestHandler_handleUpdateContent(t *testing.T) {
+	//testMode = true
+	var h Handler
+	h.Templates = template.Must(template.ParseFiles("index.html"))
+	h.TokenMap = make(map[string]*oauth2.Token)
+	var s usession.Session
+	h.Sess = s
+	r, _ := http.NewRequest("GET", "/challenge?archived=on&fpath=rs/challenge/en_us?g=g&b=b", nil)
+	w := httptest.NewRecorder()
+	h.Sess.InitSessionStore(w, r)
+	session, _ := h.Sess.GetSession(r)
+	session.Values["accessTokenKey"] = "123456"
+	//session.Values["userLoggenIn"] = true
+	session.Values["clientId"] = "123"
+	var resp oauth2.Token
+	resp.AccessToken = "bbbnn"
+	h.TokenMap["123456"] = &resp
+	h.handleUpdateContent(w, r)
+	testMode = false
+}
+
+func TestHandler_handleUpdateContent2(t *testing.T) {
+	testMode = true
+	var h Handler
+	h.Templates = template.Must(template.ParseFiles("index.html"))
+	h.TokenMap = make(map[string]*oauth2.Token)
+	var s usession.Session
+	h.Sess = s
+	r, _ := http.NewRequest("GET", "/challenge?archived=on&fpath=rs/challenge/en_us?g=g&b=b", nil)
+	w := httptest.NewRecorder()
+	h.Sess.InitSessionStore(w, r)
+	session, _ := h.Sess.GetSession(r)
+	session.Values["accessTokenKey"] = "123456"
+	session.Values["userLoggenIn"] = true
+	session.Values["clientId"] = "123"
+	var resp oauth2.Token
+	resp.AccessToken = "bbbnn"
+	h.TokenMap["123456"] = &resp
+	h.handleUpdateContent(w, r)
+	testMode = false
+}
+
+func TestHandler_handleUpdateContent3(t *testing.T) {
+	//testMode = true
+	var h Handler
+	h.Templates = template.Must(template.ParseFiles("index.html"))
+	h.TokenMap = make(map[string]*oauth2.Token)
+	var s usession.Session
+	h.Sess = s
+	r, _ := http.NewRequest("GET", "/challenge?archived=off&fpath=rs/challenge/en_us?g=g&b=b", nil)
+	w := httptest.NewRecorder()
+	h.Sess.InitSessionStore(w, r)
+	session, _ := h.Sess.GetSession(r)
+	session.Values["accessTokenKey"] = "123456"
+	session.Values["userLoggenIn"] = true
+	session.Values["clientId"] = "123"
+	var resp oauth2.Token
+	resp.AccessToken = "bbbnn"
+	h.TokenMap["123456"] = &resp
+	h.handleUpdateContent(w, r)
+	testMode = false
+}

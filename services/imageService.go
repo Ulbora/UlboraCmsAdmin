@@ -205,14 +205,14 @@ func (i *ImageService) DeleteImage(id string) *ImageResponse {
 }
 
 func getExt(name string) string {
-	var rtn = ""
+	var rtn string
 	i := strings.LastIndex(name, ".")
 	rtn = name[i+1:]
 	return rtn
 }
 
 func stripSpace(name string) string {
-	var rtn = ""
+	var rtn string
 	rtn = strings.Replace(name, " ", "", -1)
 	return rtn
 }

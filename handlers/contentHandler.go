@@ -156,7 +156,7 @@ func (h *Handler) handleUpdateContent(w http.ResponseWriter, r *http.Request) {
 	session := h.getSession(w, r)
 	loggedIn := session.Values["userLoggenIn"]
 	token := h.getToken(w, r)
-	if loggedIn == nil || loggedIn.(bool) == false || token == nil {
+	if loggedIn == nil || !loggedIn.(bool) || token == nil {
 		h.loginImplicit(w, r)
 	} else {
 		clientID := session.Values["clientId"].(string)
@@ -255,5 +255,99 @@ func (h *Handler) handleUpdateContent(w http.ResponseWriter, r *http.Request) {
 			fmt.Println("Content update failed")
 			http.Redirect(w, r, "/", http.StatusFound)
 		}
+	}
+}
+
+func (h *Handler) handleGetContent(w http.ResponseWriter, r *http.Request) {
+	h.Sess.InitSessionStore(w, r)
+	session := h.getSession(w, r)
+	loggedIn := session.Values["userLoggenIn"]
+	token := h.getToken(w, r)
+	if loggedIn == nil || !loggedIn.(bool) || token == nil {
+		h.loginImplicit(w, r)
+	} else {
+		clientID := session.Values["clientId"].(string)
+		// vars := mux.Vars(r)
+		//id := vars["id"]
+		id := r.URL.Query().Get("id")
+		var c services.ContentService
+		c.ClientID = clientID
+		c.APIClient = getGatewayAPIClient()
+		c.APIKey = getGatewayAPIKey()
+		c.Host = getContentHost()
+		res := c.GetContent(id, clientID)
+
+		var i services.ImageService
+		i.ClientID = clientID
+		i.APIClient = getGatewayAPIClient()
+		i.APIKey = getGatewayAPIKey()
+		//i.UserID = getHashedUser()
+		//i.Hashed = "true"
+		i.Token = token.AccessToken
+		//fmt.Println(token.AccessToken)
+		i.Host = getImageHost()
+
+		ires := i.GetList()
+
+		var ci = new(contentAndImages)
+		ci.Cont = res
+		ci.Img = ires
+
+		h.Templates.ExecuteTemplate(w, "updateContent.html", &ci)
+	}
+}
+
+func (h *Handler) handleDeleteContent(w http.ResponseWriter, r *http.Request) {
+	h.Sess.InitSessionStore(w, r)
+	session := h.getSession(w, r)
+	loggedIn := session.Values["userLoggenIn"]
+	token := h.getToken(w, r)
+
+	//loggedIn := session.Values["userLoggenIn"]
+	if loggedIn == nil || !loggedIn.(bool) || token == nil {
+		h.loginImplicit(w, r)
+	} else {
+		id := r.URL.Query().Get("id")
+		clientID := session.Values["clientId"].(string)
+		//vars := mux.Vars(r)
+		//id := vars["id"]
+		//page := vars["cat"]
+		//fmt.Print("page: ")
+		//fmt.Println(page)
+		var c services.ContentService
+		c.ClientID = clientID
+		c.APIClient = getGatewayAPIClient()
+		c.APIKey = getGatewayAPIKey()
+		// c.UserID = getHashedUser()
+		// c.Hashed = "true"
+		c.Token = token.AccessToken
+		c.Host = getContentHost()
+		//res := c.DeleteContent(id)
+		var res *services.Response
+		res = c.DeleteContent(id)
+		// if res.Code == 401 {
+		// 	// get new token
+		// 	getRefreshToken(w, r)
+		// 	res = c.DeleteContent(id)
+		// }
+		if !res.Success {
+			fmt.Println("Delete content failed on ID: " + id)
+			fmt.Print("code: ")
+			fmt.Println(res.Code)
+		}
+		// else {
+		// 	// add code to delete cached page====================================
+		// 	// var c services.ContentPageService
+		// 	// c.ClientID = getAuthCodeClient()
+		// 	// c.APIKey = getGatewayAPIKey()
+		// 	// c.Token = token.AccessToken
+		// 	// c.Host = getContentHost()
+		// 	// c.PageSize = 100
+		// 	// //res2 := c.DeletePage(page)
+		// 	// c.DeletePage(page)
+		// 	//fmt.Print("delete res: ")
+		// 	//fmt.Println(res2)
+		// }
+		http.Redirect(w, r, "/", http.StatusFound)
 	}
 }

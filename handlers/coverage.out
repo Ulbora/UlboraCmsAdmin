@@ -1,10 +1,4 @@
 mode: set
-UlboraCmsAdmin/handlers/utilities.go:34.32,36.2 1 1
-UlboraCmsAdmin/handlers/utilities.go:38.30,40.2 1 1
-UlboraCmsAdmin/handlers/utilities.go:47.13,49.2 1 1
-UlboraCmsAdmin/handlers/utilities.go:54.36,56.19 2 1
-UlboraCmsAdmin/handlers/utilities.go:59.2,59.18 1 1
-UlboraCmsAdmin/handlers/utilities.go:56.19,58.3 1 1
 UlboraCmsAdmin/handlers/contentHandler.go:38.76,45.57 5 1
 UlboraCmsAdmin/handlers/contentHandler.go:45.57,47.3 1 1
 UlboraCmsAdmin/handlers/contentHandler.go:47.3,64.3 9 1
@@ -15,8 +9,8 @@ UlboraCmsAdmin/handlers/contentHandler.go:100.3,139.30 20 1
 UlboraCmsAdmin/handlers/contentHandler.go:94.22,96.4 1 1
 UlboraCmsAdmin/handlers/contentHandler.go:139.30,148.4 1 1
 UlboraCmsAdmin/handlers/contentHandler.go:148.4,150.4 1 1
-UlboraCmsAdmin/handlers/contentHandler.go:154.79,159.65 5 1
-UlboraCmsAdmin/handlers/contentHandler.go:159.65,161.3 1 1
+UlboraCmsAdmin/handlers/contentHandler.go:154.79,159.57 5 1
+UlboraCmsAdmin/handlers/contentHandler.go:159.57,161.3 1 1
 UlboraCmsAdmin/handlers/contentHandler.go:161.3,189.22 10 1
 UlboraCmsAdmin/handlers/contentHandler.go:195.3,221.23 14 1
 UlboraCmsAdmin/handlers/contentHandler.go:227.3,245.30 9 1
@@ -25,6 +19,14 @@ UlboraCmsAdmin/handlers/contentHandler.go:221.23,223.4 1 1
 UlboraCmsAdmin/handlers/contentHandler.go:223.4,225.4 1 1
 UlboraCmsAdmin/handlers/contentHandler.go:245.30,254.4 1 1
 UlboraCmsAdmin/handlers/contentHandler.go:254.4,257.4 2 1
+UlboraCmsAdmin/handlers/contentHandler.go:261.76,266.57 5 1
+UlboraCmsAdmin/handlers/contentHandler.go:266.57,268.3 1 1
+UlboraCmsAdmin/handlers/contentHandler.go:268.3,297.3 19 1
+UlboraCmsAdmin/handlers/contentHandler.go:300.79,307.57 5 1
+UlboraCmsAdmin/handlers/contentHandler.go:307.57,309.3 1 1
+UlboraCmsAdmin/handlers/contentHandler.go:309.3,333.19 11 1
+UlboraCmsAdmin/handlers/contentHandler.go:351.3,351.45 1 1
+UlboraCmsAdmin/handlers/contentHandler.go:333.19,337.4 3 1
 UlboraCmsAdmin/handlers/handler.go:51.82,54.67 3 1
 UlboraCmsAdmin/handlers/handler.go:57.2,57.14 1 1
 UlboraCmsAdmin/handlers/handler.go:54.67,56.3 1 1
@@ -73,3 +75,9 @@ UlboraCmsAdmin/handlers/loginHandler.go:61.73,64.2 1 1
 UlboraCmsAdmin/handlers/loginHandler.go:66.79,102.2 21 1
 UlboraCmsAdmin/handlers/loginHandler.go:104.79,108.43 3 1
 UlboraCmsAdmin/handlers/loginHandler.go:108.43,133.3 11 1
+UlboraCmsAdmin/handlers/utilities.go:34.32,36.2 1 1
+UlboraCmsAdmin/handlers/utilities.go:38.30,40.2 1 1
+UlboraCmsAdmin/handlers/utilities.go:47.13,49.2 1 1
+UlboraCmsAdmin/handlers/utilities.go:54.36,56.19 2 1
+UlboraCmsAdmin/handlers/utilities.go:59.2,59.18 1 1
+UlboraCmsAdmin/handlers/utilities.go:56.19,58.3 1 1

@@ -1,12 +1,4 @@
 mode: set
-UlboraCmsAdmin/handlers/imageHandler.go:41.74,46.57 5 1
-UlboraCmsAdmin/handlers/imageHandler.go:46.57,48.3 1 1
-UlboraCmsAdmin/handlers/imageHandler.go:48.3,50.3 1 1
-UlboraCmsAdmin/handlers/imageHandler.go:53.78,58.57 5 1
-UlboraCmsAdmin/handlers/imageHandler.go:58.57,60.3 1 1
-UlboraCmsAdmin/handlers/imageHandler.go:60.3,122.38 28 1
-UlboraCmsAdmin/handlers/imageHandler.go:122.38,124.4 1 1
-UlboraCmsAdmin/handlers/imageHandler.go:124.4,127.4 2 1
 UlboraCmsAdmin/handlers/indexHandler.go:35.76,49.57 5 1
 UlboraCmsAdmin/handlers/indexHandler.go:49.57,52.3 1 1
 UlboraCmsAdmin/handlers/indexHandler.go:52.3,63.3 8 1
@@ -89,3 +81,19 @@ UlboraCmsAdmin/handlers/handler.go:141.41,144.3 2 1
 UlboraCmsAdmin/handlers/handler.go:144.3,144.42 1 1
 UlboraCmsAdmin/handlers/handler.go:144.42,146.3 1 1
 UlboraCmsAdmin/handlers/handler.go:146.3,148.3 1 1
+UlboraCmsAdmin/handlers/imageHandler.go:42.74,47.57 5 1
+UlboraCmsAdmin/handlers/imageHandler.go:47.57,49.3 1 1
+UlboraCmsAdmin/handlers/imageHandler.go:49.3,51.3 1 1
+UlboraCmsAdmin/handlers/imageHandler.go:54.78,59.57 5 1
+UlboraCmsAdmin/handlers/imageHandler.go:59.57,61.3 1 1
+UlboraCmsAdmin/handlers/imageHandler.go:61.3,123.30 28 1
+UlboraCmsAdmin/handlers/imageHandler.go:123.30,125.4 1 1
+UlboraCmsAdmin/handlers/imageHandler.go:125.4,128.4 2 1
+UlboraCmsAdmin/handlers/imageHandler.go:132.72,137.58 5 1
+UlboraCmsAdmin/handlers/imageHandler.go:137.58,139.3 1 1
+UlboraCmsAdmin/handlers/imageHandler.go:139.3,151.3 9 1
+UlboraCmsAdmin/handlers/imageHandler.go:154.77,159.57 5 1
+UlboraCmsAdmin/handlers/imageHandler.go:159.57,161.3 1 1
+UlboraCmsAdmin/handlers/imageHandler.go:161.3,175.31 11 1
+UlboraCmsAdmin/handlers/imageHandler.go:180.3,180.45 1 1
+UlboraCmsAdmin/handlers/imageHandler.go:175.31,179.4 3 1

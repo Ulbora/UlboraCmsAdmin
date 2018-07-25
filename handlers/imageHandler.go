@@ -30,6 +30,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	//"strconv"
 	// "fmt"
 	// "strconv"
 	// "strings"
@@ -125,5 +126,57 @@ func (h *Handler) handleImagerUpload(w http.ResponseWriter, r *http.Request) {
 			fmt.Println("Image upload failed")
 			http.Redirect(w, r, "/", http.StatusFound)
 		}
+	}
+}
+
+func (h *Handler) handleImages(w http.ResponseWriter, r *http.Request) {
+	h.Sess.InitSessionStore(w, r)
+	session := h.getSession(w, r)
+	loggedIn := session.Values["userLoggenIn"]
+	tokeni := h.getToken(w, r)
+	if loggedIn == nil || !loggedIn.(bool) || tokeni == nil {
+		h.loginImplicit(w, r)
+	} else {
+		clientID := session.Values["clientId"].(string)
+		var i services.ImageService
+		i.ClientID = clientID
+		i.APIClient = getGatewayAPIClient()
+		i.APIKey = getGatewayAPIKey()
+		i.Host = getImageHost()
+		i.Token = tokeni.AccessToken
+
+		res := i.GetList()
+
+		h.Templates.ExecuteTemplate(w, "images.html", &res)
+	}
+}
+
+func (h *Handler) handleDeleteImage(w http.ResponseWriter, r *http.Request) {
+	h.Sess.InitSessionStore(w, r)
+	session := h.getSession(w, r)
+	loggedIn := session.Values["userLoggenIn"]
+	token := h.getToken(w, r)
+	if loggedIn == nil || !loggedIn.(bool) || token == nil {
+		h.loginImplicit(w, r)
+	} else {
+		clientID := session.Values["clientId"].(string)
+		id := r.FormValue("id")
+		//id, _ := strconv.ParseInt(idStr, 10, 0)
+		var i services.ImageService
+		i.ClientID = clientID
+		i.APIClient = getGatewayAPIClient()
+		i.APIKey = getGatewayAPIKey()
+		i.Host = getImageHost()
+		i.Token = token.AccessToken
+		var res *services.ImageResponse
+		res = i.DeleteImage(id)
+
+		//res := i.DeleteImage(id)
+		if !res.Success || testMode {
+			fmt.Println("Delete image failed on ID: " + id)
+			fmt.Print("code: ")
+			fmt.Println(res.Code)
+		}
+		http.Redirect(w, r, "/", http.StatusFound)
 	}
 }

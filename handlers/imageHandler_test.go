@@ -46,6 +46,77 @@ func TestHandler_handleAddImage2(t *testing.T) {
 	h.handleAddImage(w, r)
 }
 
+func TestHandler_handleImages(t *testing.T) {
+	var h Handler
+	h.Templates = template.Must(template.ParseFiles("index.html"))
+	h.TokenMap = make(map[string]*oauth2.Token)
+	var s usession.Session
+	h.Sess = s
+	r, _ := http.NewRequest("GET", "/challenge?clientId=1255&fpath=rs/challenge/en_us?g=g&b=b", nil)
+	w := httptest.NewRecorder()
+	h.Sess.InitSessionStore(w, r)
+	session, _ := h.Sess.GetSession(r)
+	session.Values["accessTokenKey"] = "123456"
+	var resp oauth2.Token
+	resp.AccessToken = "bbbnn"
+	h.TokenMap["123456"] = &resp
+	h.handleImages(w, r)
+}
+
+func TestHandler_handleImages2(t *testing.T) {
+	var h Handler
+	h.Templates = template.Must(template.ParseFiles("index.html"))
+	h.TokenMap = make(map[string]*oauth2.Token)
+	var s usession.Session
+	h.Sess = s
+	r, _ := http.NewRequest("GET", "/challenge?clientId=1255&fpath=rs/challenge/en_us?g=g&b=b", nil)
+	w := httptest.NewRecorder()
+	h.Sess.InitSessionStore(w, r)
+	session, _ := h.Sess.GetSession(r)
+	session.Values["accessTokenKey"] = "123456"
+	session.Values["clientId"] = "123"
+	session.Values["userLoggenIn"] = true
+	var resp oauth2.Token
+	resp.AccessToken = "bbbnn"
+	h.TokenMap["123456"] = &resp
+	h.handleImages(w, r)
+}
+
+func TestHandler_handleDeleteImage(t *testing.T) {
+	var h Handler
+	h.Templates = template.Must(template.ParseFiles("index.html"))
+	h.TokenMap = make(map[string]*oauth2.Token)
+	var s usession.Session
+	h.Sess = s
+	r, _ := http.NewRequest("DELETE", "/challenge?clientId=1255&id=123", nil)
+	w := httptest.NewRecorder()
+	h.Sess.InitSessionStore(w, r)
+	session, _ := h.Sess.GetSession(r)
+	session.Values["accessTokenKey"] = "123456"
+	var resp oauth2.Token
+	resp.AccessToken = "bbbnn"
+	h.TokenMap["123456"] = &resp
+	h.handleDeleteImage(w, r)
+}
+
+func TestHandler_handleDeleteImage2(t *testing.T) {
+	var h Handler
+	h.Templates = template.Must(template.ParseFiles("index.html"))
+	h.TokenMap = make(map[string]*oauth2.Token)
+	var s usession.Session
+	h.Sess = s
+	r, _ := http.NewRequest("DELETE", "/challenge?clientId=1255&id=123", nil)
+	w := httptest.NewRecorder()
+	h.Sess.InitSessionStore(w, r)
+	session, _ := h.Sess.GetSession(r)
+	session.Values["accessTokenKey"] = "123456"
+	session.Values["userLoggenIn"] = true
+	session.Values["clientId"] = "123"
+	var resp oauth2.Token
+	resp.AccessToken = "bbbnn"
+	h.TokenMap["123456"] = &resp
+	h.handleDeleteImage(w, r)
+}
 func TestHandler_handleImagerUpload(t *testing.T) {
 	var h Handler
 	h.Templates = template.Must(template.ParseFiles("index.html"))

@@ -39,7 +39,8 @@ import (
 	// "net/http"
 )
 
-func (h *Handler) handleAddImage(w http.ResponseWriter, r *http.Request) {
+//HandleAddImage HandleAddImage
+func (h *Handler) HandleAddImage(w http.ResponseWriter, r *http.Request) {
 	h.Sess.InitSessionStore(w, r)
 	session := h.getSession(w, r)
 	loggedIn := session.Values["userLoggenIn"]
@@ -51,7 +52,8 @@ func (h *Handler) handleAddImage(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (h *Handler) handleImagerUpload(w http.ResponseWriter, r *http.Request) {
+//HandleImagerUpload HandleImagerUpload
+func (h *Handler) HandleImagerUpload(w http.ResponseWriter, r *http.Request) {
 	h.Sess.InitSessionStore(w, r)
 	session := h.getSession(w, r)
 	loggedIn := session.Values["userLoggenIn"]
@@ -129,7 +131,8 @@ func (h *Handler) handleImagerUpload(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (h *Handler) handleImages(w http.ResponseWriter, r *http.Request) {
+//HandleImages HandleImages
+func (h *Handler) HandleImages(w http.ResponseWriter, r *http.Request) {
 	h.Sess.InitSessionStore(w, r)
 	session := h.getSession(w, r)
 	loggedIn := session.Values["userLoggenIn"]
@@ -151,7 +154,8 @@ func (h *Handler) handleImages(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (h *Handler) handleDeleteImage(w http.ResponseWriter, r *http.Request) {
+//HandleDeleteImage HandleDeleteImage
+func (h *Handler) HandleDeleteImage(w http.ResponseWriter, r *http.Request) {
 	h.Sess.InitSessionStore(w, r)
 	session := h.getSession(w, r)
 	loggedIn := session.Values["userLoggenIn"]

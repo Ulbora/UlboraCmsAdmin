@@ -208,8 +208,8 @@ func (h *Handler) HandleUpdateContent(w http.ResponseWriter, r *http.Request) {
 		//fmt.Println(desc)
 
 		archived := r.FormValue("archived")
-		//fmt.Print("archived: ")
-		//fmt.Println(archived)
+		fmt.Print("archived: ")
+		fmt.Println(archived)
 
 		var ct services.Content
 		ct.ID = id

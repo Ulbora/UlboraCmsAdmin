@@ -48,11 +48,17 @@ func main() {
 	router.HandleFunc("/loginUser", h.HandleImplicitLogin).Methods("POST")
 	router.HandleFunc("/tokenImplicitHandler", h.HandleImplicitToken).Methods("GET")
 	router.HandleFunc("/logout", h.HandleLogout).Methods("GET")
+
 	router.HandleFunc("/addContent", h.HandleAddContent).Methods("GET")
 	router.HandleFunc("/newContent", h.HandleNewContent).Methods("POST")
-	router.HandleFunc("/getContent/{id}", h.HandleGetContent).Methods("GET")
-	router.HandleFunc("/updateContent", h.HandleUpdateContent).Methods("PUT")
-	router.HandleFunc("/deleteContent/{id}/{cat}", h.HandleDeleteContent).Methods("DELETE")
+	router.HandleFunc("/getContent", h.HandleGetContent).Methods("GET")
+	router.HandleFunc("/updateContent", h.HandleUpdateContent).Methods("POST")
+	router.HandleFunc("/deleteContent", h.HandleDeleteContent).Methods("GET")
+
+	router.HandleFunc("/addImage", h.HandleAddImage).Methods("POST")
+	router.HandleFunc("/admin/uploadImage", h.HandleImagerUpload).Methods("POST")
+	router.HandleFunc("/admin/images", h.HandleImages).Methods("GET")
+	router.HandleFunc("/admin/deleteImage/{id}", h.HandleDeleteImage).Methods("GET")
 
 	router.PathPrefix("/").Handler(http.FileServer(http.Dir("./static/")))
 

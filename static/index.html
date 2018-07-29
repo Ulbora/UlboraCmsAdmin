@@ -27,7 +27,7 @@
                 {{range .}}
                 <tr onclick="window.location.href='/getContent/{{.ID}}'">
                     <td>
-                        <a href="/getContent/{{.ID}}">{{.Title}} </a>
+                        <a href="/getContent?id={{.ID}}">{{.Title}} </a>
                     </td>
                     <td>{{.Category}}</td>
                     <td>{{.SortOrder}}</td>

@@ -25,7 +25,7 @@ func TestHandler_handleAddImage(t *testing.T) {
 	var resp oauth2.Token
 	resp.AccessToken = "bbbnn"
 	h.TokenMap["123456"] = &resp
-	h.handleAddImage(w, r)
+	h.HandleAddImage(w, r)
 }
 
 func TestHandler_handleAddImage2(t *testing.T) {
@@ -43,7 +43,7 @@ func TestHandler_handleAddImage2(t *testing.T) {
 	var resp oauth2.Token
 	resp.AccessToken = "bbbnn"
 	h.TokenMap["123456"] = &resp
-	h.handleAddImage(w, r)
+	h.HandleAddImage(w, r)
 }
 
 func TestHandler_handleImages(t *testing.T) {
@@ -60,7 +60,7 @@ func TestHandler_handleImages(t *testing.T) {
 	var resp oauth2.Token
 	resp.AccessToken = "bbbnn"
 	h.TokenMap["123456"] = &resp
-	h.handleImages(w, r)
+	h.HandleImages(w, r)
 }
 
 func TestHandler_handleImages2(t *testing.T) {
@@ -79,7 +79,7 @@ func TestHandler_handleImages2(t *testing.T) {
 	var resp oauth2.Token
 	resp.AccessToken = "bbbnn"
 	h.TokenMap["123456"] = &resp
-	h.handleImages(w, r)
+	h.HandleImages(w, r)
 }
 
 func TestHandler_handleDeleteImage(t *testing.T) {
@@ -96,7 +96,7 @@ func TestHandler_handleDeleteImage(t *testing.T) {
 	var resp oauth2.Token
 	resp.AccessToken = "bbbnn"
 	h.TokenMap["123456"] = &resp
-	h.handleDeleteImage(w, r)
+	h.HandleDeleteImage(w, r)
 }
 
 func TestHandler_handleDeleteImage2(t *testing.T) {
@@ -115,7 +115,7 @@ func TestHandler_handleDeleteImage2(t *testing.T) {
 	var resp oauth2.Token
 	resp.AccessToken = "bbbnn"
 	h.TokenMap["123456"] = &resp
-	h.handleDeleteImage(w, r)
+	h.HandleDeleteImage(w, r)
 }
 func TestHandler_handleImagerUpload(t *testing.T) {
 	var h Handler
@@ -131,7 +131,7 @@ func TestHandler_handleImagerUpload(t *testing.T) {
 	var resp oauth2.Token
 	resp.AccessToken = "bbbnn"
 	h.TokenMap["123456"] = &resp
-	h.handleImagerUpload(w, r)
+	h.HandleImagerUpload(w, r)
 }
 
 func TestHandler_handleImagerUpload2(t *testing.T) {
@@ -151,7 +151,7 @@ func TestHandler_handleImagerUpload2(t *testing.T) {
 	var resp oauth2.Token
 	resp.AccessToken = "bbbnn"
 	h.TokenMap["123456"] = &resp
-	h.handleImagerUpload(w, r)
+	h.HandleImagerUpload(w, r)
 }
 
 func TestHandler_handleImagerUpload3(t *testing.T) {
@@ -171,7 +171,7 @@ func TestHandler_handleImagerUpload3(t *testing.T) {
 	var resp oauth2.Token
 	resp.AccessToken = "bbbnn"
 	h.TokenMap["123456"] = &resp
-	h.handleImagerUpload(w, r)
+	h.HandleImagerUpload(w, r)
 }
 
 func newTestMultipartRequest(t *testing.T) *http.Request {

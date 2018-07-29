@@ -38,9 +38,10 @@ import (
 
 //Handler Handler
 type Handler struct {
-	Sess      usession.Session
-	TokenMap  map[string]*oauth2.Token
-	Templates *template.Template
+	Sess             usession.Session
+	TokenMap         map[string]*oauth2.Token
+	Templates        *template.Template
+	ClientCredSecret string
 }
 
 type contentAndImages struct {
@@ -147,4 +148,13 @@ func getImageHost() string {
 		rtn = "http://localhost:3011/image"
 	}
 	return rtn
+}
+
+//GetCredentialsSecret GetCredentialsSecret
+func (h *Handler) GetCredentialsSecret(cs string) {
+	if os.Getenv("OAUTH2_CREDENTIALS_SECRET") != "" {
+		h.ClientCredSecret = os.Getenv("OAUTH2_CREDENTIALS_SECRET")
+	} else {
+		h.ClientCredSecret = cs
+	}
 }

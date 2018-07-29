@@ -35,13 +35,16 @@ import (
 	"net/http"
 )
 
-func (h *Handler) handleAddContent(w http.ResponseWriter, r *http.Request) {
+//HandleAddContent HandleAddContent
+func (h *Handler) HandleAddContent(w http.ResponseWriter, r *http.Request) {
 
 	h.Sess.InitSessionStore(w, r)
 	session := h.getSession(w, r)
 
 	loggedIn := session.Values["userLoggenIn"]
 	token := h.getToken(w, r)
+	fmt.Print("loggedIn in addcontent: ")
+	fmt.Println(loggedIn)
 	if loggedIn == nil || !loggedIn.(bool) || token == nil {
 		h.loginImplicit(w, r)
 	} else {
@@ -64,22 +67,25 @@ func (h *Handler) handleAddContent(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (h *Handler) handleNewContent(w http.ResponseWriter, r *http.Request) {
+//HandleNewContent HandleNewContent
+func (h *Handler) HandleNewContent(w http.ResponseWriter, r *http.Request) {
 	h.Sess.InitSessionStore(w, r)
 	session := h.getSession(w, r)
 	loggedIn := session.Values["userLoggenIn"]
 	token := h.getToken(w, r)
+	fmt.Print("loggedIn in newcontent: ")
+	fmt.Println(loggedIn)
 	if loggedIn == nil || !loggedIn.(bool) || token == nil {
 		h.loginImplicit(w, r)
 	} else {
 		clientID := session.Values["clientId"].(string)
 		content := r.FormValue("content")
-		//fmt.Print("content: ")
-		//fmt.Println(content)
+		fmt.Print("content: ")
+		fmt.Println(content)
 
 		title := r.FormValue("title")
-		//fmt.Print("title: ")
-		//fmt.Println(title)
+		fmt.Print("title: ")
+		fmt.Println(title)
 
 		author := r.FormValue("author")
 		//fmt.Print("author: ")
@@ -127,8 +133,8 @@ func (h *Handler) handleNewContent(w http.ResponseWriter, r *http.Request) {
 		c.Host = getContentHost()
 		var res *services.Response
 		res = c.AddContent(&ct)
-		//fmt.Print("res: ")
-		//fmt.Println(res)
+		fmt.Print("res: ")
+		fmt.Println(res)
 		// if res.Code == 401 {
 		// 	// get new token
 		// 	getRefreshToken(w, r)
@@ -151,7 +157,8 @@ func (h *Handler) handleNewContent(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (h *Handler) handleUpdateContent(w http.ResponseWriter, r *http.Request) {
+//HandleUpdateContent HandleUpdateContent
+func (h *Handler) HandleUpdateContent(w http.ResponseWriter, r *http.Request) {
 	h.Sess.InitSessionStore(w, r)
 	session := h.getSession(w, r)
 	loggedIn := session.Values["userLoggenIn"]
@@ -258,7 +265,8 @@ func (h *Handler) handleUpdateContent(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (h *Handler) handleGetContent(w http.ResponseWriter, r *http.Request) {
+//HandleGetContent HandleGetContent
+func (h *Handler) HandleGetContent(w http.ResponseWriter, r *http.Request) {
 	h.Sess.InitSessionStore(w, r)
 	session := h.getSession(w, r)
 	loggedIn := session.Values["userLoggenIn"]
@@ -297,7 +305,8 @@ func (h *Handler) handleGetContent(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (h *Handler) handleDeleteContent(w http.ResponseWriter, r *http.Request) {
+//HandleDeleteContent HandleDeleteContent
+func (h *Handler) HandleDeleteContent(w http.ResponseWriter, r *http.Request) {
 	h.Sess.InitSessionStore(w, r)
 	session := h.getSession(w, r)
 	loggedIn := session.Values["userLoggenIn"]

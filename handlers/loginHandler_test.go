@@ -30,8 +30,9 @@ func TestHandler_handleLogout(t *testing.T) {
 	var resp oauth2.Token
 	resp.AccessToken = "bbbnn"
 	h.TokenMap["123456"] = &resp
-	h.handleLogout(w, r)
+	h.HandleLogout(w, r)
 }
+
 func TestHandler_loginImplicit(t *testing.T) {
 	var h Handler
 	h.Templates = template.Must(template.ParseFiles("login.html"))
@@ -47,7 +48,7 @@ func TestHandler_handleImplicitLogin(t *testing.T) {
 	h.Sess = s
 	r, _ := http.NewRequest("GET", "/challenge?clientId=12345", nil)
 	w := httptest.NewRecorder()
-	h.handleImplicitLogin(w, r)
+	h.HandleImplicitLogin(w, r)
 }
 
 func TestHandler_handleImplicitToken(t *testing.T) {
@@ -58,5 +59,5 @@ func TestHandler_handleImplicitToken(t *testing.T) {
 	r, _ := http.NewRequest("GET", "/challenge?token=ghj555&state=ghh66555h", nil)
 	w := httptest.NewRecorder()
 	h.Sess.InitSessionStore(w, r)
-	h.handleImplicitToken(w, r)
+	h.HandleImplicitToken(w, r)
 }

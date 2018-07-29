@@ -37,11 +37,11 @@ func (h *Handler) handleLogin(w http.ResponseWriter, r *http.Request) {
 	h.loginImplicit(w, r)
 }
 
-// login handler
-func (h *Handler) handleLogout(w http.ResponseWriter, r *http.Request) {
+//HandleLogout HandleLogout
+func (h *Handler) HandleLogout(w http.ResponseWriter, r *http.Request) {
 	h.removeToken(w, r)
 	cookie := &http.Cookie{
-		Name:   "ugw-user-session",
+		Name:   "ucms-user-session",
 		Value:  "",
 		Path:   "/",
 		MaxAge: -1,
@@ -63,7 +63,8 @@ func (h *Handler) loginImplicit(w http.ResponseWriter, r *http.Request) {
 	h.Templates.ExecuteTemplate(w, "login.html", nil)
 }
 
-func (h *Handler) handleImplicitLogin(w http.ResponseWriter, r *http.Request) {
+//HandleImplicitLogin HandleImplicitLogin
+func (h *Handler) HandleImplicitLogin(w http.ResponseWriter, r *http.Request) {
 	h.Sess.InitSessionStore(w, r)
 	clientID := r.FormValue("clientId")
 	session := h.getSession(w, r)
@@ -101,13 +102,14 @@ func (h *Handler) handleImplicitLogin(w http.ResponseWriter, r *http.Request) {
 	//}
 }
 
-func (h *Handler) handleImplicitToken(w http.ResponseWriter, r *http.Request) {
+//HandleImplicitToken HandleImplicitToken
+func (h *Handler) HandleImplicitToken(w http.ResponseWriter, r *http.Request) {
 	token := r.URL.Query().Get("token")
 	state := r.URL.Query().Get("state")
 	//fmt.Println("handle token")
 	if state == authCodeState && token != "" {
 		//if token != "" {
-		fmt.Println(token)
+		//fmt.Println(token)
 		//token = resp
 		session := h.getSession(w, r)
 		// if err != nil {
@@ -125,8 +127,11 @@ func (h *Handler) handleImplicitToken(w http.ResponseWriter, r *http.Request) {
 		//fmt.Print("session id: ")
 		//fmt.Println(session.ID)
 		err := session.Save(r, w)
+		loggedIn := session.Values["userLoggenIn"]
+		fmt.Print("loggedIn in index: ")
+		fmt.Println(loggedIn)
 		fmt.Println(err)
-		http.Redirect(w, r, "/oauth2", http.StatusFound)
+		http.Redirect(w, r, "/", http.StatusFound)
 		// decode token and get user id
 		//}
 		//}

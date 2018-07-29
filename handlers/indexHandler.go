@@ -27,12 +27,13 @@ package handlers
 
 import (
 	services "UlboraCmsAdmin/services"
+	"fmt"
 	//"fmt"
 	//"fmt"
 	"net/http"
 )
 
-func (h *Handler) handleAdminIndex(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) HandleAdminIndex(w http.ResponseWriter, r *http.Request) {
 	h.Sess.InitSessionStore(w, r)
 	// session, err := h.Sess.GetSession(r)
 	// if err != nil {
@@ -42,8 +43,8 @@ func (h *Handler) handleAdminIndex(w http.ResponseWriter, r *http.Request) {
 	session := h.getSession(w, r)
 	loggedIn := session.Values["userLoggenIn"]
 	token := h.getToken(w, r)
-	// fmt.Print("loggedIn in index: ")
-	// fmt.Println(loggedIn)
+	fmt.Print("loggedIn in index: ")
+	fmt.Println(loggedIn)
 	// fmt.Print("token in index: ")
 	// fmt.Println(token)
 	if loggedIn == nil || !loggedIn.(bool) || token == nil {

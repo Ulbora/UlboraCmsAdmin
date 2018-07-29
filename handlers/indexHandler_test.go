@@ -24,7 +24,7 @@ func TestHandler_handleAdminIndex(t *testing.T) {
 	var resp oauth2.Token
 	resp.AccessToken = "bbbnn"
 	h.TokenMap["123456"] = &resp
-	h.handleAdminIndex(w, r)
+	h.HandleAdminIndex(w, r)
 }
 
 func TestHandler_handleAdminIndex2(t *testing.T) {
@@ -43,5 +43,5 @@ func TestHandler_handleAdminIndex2(t *testing.T) {
 	var resp oauth2.Token
 	resp.AccessToken = "bbbnn"
 	h.TokenMap["123456"] = &resp
-	h.handleAdminIndex(w, r)
+	h.HandleAdminIndex(w, r)
 }

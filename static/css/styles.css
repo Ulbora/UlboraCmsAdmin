@@ -1,0 +1,269 @@
+.login-form {
+  margin: 5% 0 40% 30%;
+  width: 40%;
+}
+body {
+  color: #04048d;
+}
+@media (min-width: 1024px) {
+  body {
+    font-size: 12pt;
+  }
+}
+@media (max-width: 1024px) {
+  body {
+    font-size: 12pt;
+  }
+}
+@media (max-height: 700px) {
+  body {
+    font-size: 12pt;
+  }
+}
+@media (max-width: 768px) {
+  body {
+    font-size: 10pt;
+  }
+}
+@media (max-width: 480px) {
+  body {
+    font-size: 10pt;
+  }
+}
+.top-header {
+  background: #7680ad;
+  color: white;
+  width: 100%;
+}
+@media (min-width: 1024px) {
+  .top-header {
+    padding: 1% 0 .5% 0;
+    margin: 0 0 1% 0;
+  }
+}
+@media (max-width: 1024px) {
+  .top-header {
+    padding: 1.5% 0 1% 0;
+    margin: 0 0 1% 0;
+  }
+}
+@media (max-height: 700px) {
+  .top-header {
+    padding: 1.5% 0 1% 0;
+    margin: 0 0 1% 0;
+  }
+}
+@media (max-width: 768px) {
+  .top-header {
+    padding: 2% 0 1.5% 0;
+    margin: 0 0 1% 0;
+  }
+}
+@media (max-width: 480px) {
+  .top-header {
+    padding: 2% 0 1.5% 0;
+    margin: 0 0 1% 0;
+  }
+}
+.top-header a:link {
+  color: white;
+}
+.top-header a:visited {
+  color: white;
+}
+.top-header a:hover {
+  color: white;
+  text-decoration: underline;
+}
+.logo {
+  font-weight: bold;
+}
+@media (min-width: 1024px) {
+  .logo {
+    padding: .5% 0 0 1%;
+    font-size: 14pt;
+  }
+}
+@media (max-width: 1024px) {
+  .logo {
+    font-size: 14pt;
+    padding: .5% 0 0 1%;
+  }
+}
+@media (max-height: 700px) {
+  .logo {
+    font-size: 14pt;
+    padding: .5% 0 0 2%;
+  }
+}
+@media (max-width: 768px) {
+  .logo {
+    font-size: 12pt;
+    padding: .5% 0 0 2%;
+  }
+}
+@media (max-width: 480px) {
+  .logo {
+    font-size: 10pt;
+    padding: .5% 0 0 2%;
+  }
+}
+.logo-img {
+  padding: 0 0 0 0;
+  margin: 0 0 0 0;
+}
+@media (min-width: 1024px) {
+  .logo-img img {
+    width: 6%;
+  }
+}
+@media (max-width: 1024px) {
+  .logo-img img {
+    width: 12%;
+  }
+}
+@media (max-width: 768px) {
+  .logo-img img {
+    width: 14%;
+  }
+}
+@media (max-width: 580px) {
+  .logo-img img {
+    width: 16%;
+  }
+}
+@media (max-width: 480px) {
+  .logo-img img {
+    width: 18%;
+  }
+}
+.topmenu {
+  width: 100%;
+}
+@media (min-width: 1024px) {
+  .topmenu {
+    padding: 0 0 0 1%;
+    font-size: 14pt;
+  }
+}
+@media (max-width: 1024px) {
+  .topmenu {
+    font-size: 14pt;
+    padding: 0 0 0 1%;
+  }
+}
+@media (max-height: 700px) {
+  .topmenu {
+    font-size: 14pt;
+    padding: 0 0 0 2%;
+  }
+}
+@media (max-width: 768px) {
+  .topmenu {
+    font-size: 12pt;
+    padding: 0 0 0 2%;
+  }
+}
+@media (max-width: 480px) {
+  .topmenu {
+    font-size: 10pt;
+    padding: 0 0 0 2%;
+  }
+}
+.gw-menu {
+  width: 70%;
+}
+@media (min-width: 1024px) {
+  .gw-menu {
+    margin: 0% 0 0 15%;
+    font-size: 14pt;
+  }
+}
+@media (max-width: 1024px) {
+  .gw-menu {
+    margin: 0% 0 0 20%;
+    font-size: 14pt;
+  }
+}
+@media (max-height: 700px) {
+  .gw-menu {
+    margin: 0% 0 0 20%;
+    font-size: 14pt;
+  }
+}
+@media (max-width: 768px) {
+  .gw-menu {
+    margin: 0% 0 0 10%;
+    font-size: 12pt;
+  }
+}
+@media (max-width: 480px) {
+  .gw-menu {
+    margin: 0% 0 0 5%;
+    font-size: 8pt;
+  }
+}
+.gw-item {
+  color: white;
+}
+@media (min-width: 1024px) {
+  .gw-item {
+    padding: 0 1% 0 1%;
+  }
+}
+@media (max-width: 1024px) {
+  .gw-item {
+    padding: 0 1% 0 1%;
+  }
+}
+@media (max-height: 700px) {
+  .gw-item {
+    padding: 0 1% 0 1%;
+  }
+}
+@media (max-width: 768px) {
+  .gw-item {
+    padding: 0 1% 0 1%;
+  }
+}
+@media (max-width: 480px) {
+  .gw-item {
+    padding: 0 2% 0 2%;
+  }
+}
+.active {
+  font-weight: bold;
+  text-decoration: underline;
+}
+.content-list {
+  margin: 0 0 800px 0;
+}
+.content-title {
+  text-align: center;
+  width: 100%;
+  padding: 1% 0 0 0;
+}
+.page-button {
+  margin: 1% 0 1% 1%;
+}
+.image-wrapper {
+  overflow-y: auto;
+  height: 1000px;
+}
+.image-card {
+  margin: 0 0 2% 0;
+  padding: 2%;
+}
+.image-view {
+  padding: 1%;
+}
+.image-view img {
+  max-width: 100%;
+}
+.footer {
+  text-align: center;
+  width: 100%;
+  padding: 1% 0 1% 0;
+  background: black;
+  color: white;
+}

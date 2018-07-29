@@ -23,7 +23,7 @@ func TestHandler_handleAddContent(t *testing.T) {
 	var resp oauth2.Token
 	resp.AccessToken = "bbbnn"
 	h.TokenMap["123456"] = &resp
-	h.handleAddContent(w, r)
+	h.HandleAddContent(w, r)
 }
 
 func TestHandler_handleAddContent2(t *testing.T) {
@@ -42,7 +42,7 @@ func TestHandler_handleAddContent2(t *testing.T) {
 	var resp oauth2.Token
 	resp.AccessToken = "bbbnn"
 	h.TokenMap["123456"] = &resp
-	h.handleAddContent(w, r)
+	h.HandleAddContent(w, r)
 }
 
 func TestHandler_handleNewContent(t *testing.T) {
@@ -59,7 +59,7 @@ func TestHandler_handleNewContent(t *testing.T) {
 	var resp oauth2.Token
 	resp.AccessToken = "bbbnn"
 	h.TokenMap["123456"] = &resp
-	h.handleNewContent(w, r)
+	h.HandleNewContent(w, r)
 }
 
 func TestHandler_handleNewContent2(t *testing.T) {
@@ -78,7 +78,7 @@ func TestHandler_handleNewContent2(t *testing.T) {
 	var resp oauth2.Token
 	resp.AccessToken = "bbbnn"
 	h.TokenMap["123456"] = &resp
-	h.handleNewContent(w, r)
+	h.HandleNewContent(w, r)
 }
 
 func TestHandler_handleNewContent3(t *testing.T) {
@@ -98,7 +98,7 @@ func TestHandler_handleNewContent3(t *testing.T) {
 	var resp oauth2.Token
 	resp.AccessToken = "bbbnn"
 	h.TokenMap["123456"] = &resp
-	h.handleNewContent(w, r)
+	h.HandleNewContent(w, r)
 	testMode = false
 }
 
@@ -119,7 +119,7 @@ func TestHandler_handleUpdateContent(t *testing.T) {
 	var resp oauth2.Token
 	resp.AccessToken = "bbbnn"
 	h.TokenMap["123456"] = &resp
-	h.handleUpdateContent(w, r)
+	h.HandleUpdateContent(w, r)
 	testMode = false
 }
 
@@ -140,7 +140,7 @@ func TestHandler_handleUpdateContent2(t *testing.T) {
 	var resp oauth2.Token
 	resp.AccessToken = "bbbnn"
 	h.TokenMap["123456"] = &resp
-	h.handleUpdateContent(w, r)
+	h.HandleUpdateContent(w, r)
 	testMode = false
 }
 
@@ -161,7 +161,7 @@ func TestHandler_handleUpdateContent3(t *testing.T) {
 	var resp oauth2.Token
 	resp.AccessToken = "bbbnn"
 	h.TokenMap["123456"] = &resp
-	h.handleUpdateContent(w, r)
+	h.HandleUpdateContent(w, r)
 	testMode = false
 }
 
@@ -182,7 +182,7 @@ func TestHandler_handleGetContent(t *testing.T) {
 	var resp oauth2.Token
 	resp.AccessToken = "bbbnn"
 	h.TokenMap["123456"] = &resp
-	h.handleGetContent(w, r)
+	h.HandleGetContent(w, r)
 	testMode = false
 }
 
@@ -203,7 +203,7 @@ func TestHandler_handleGetContent2(t *testing.T) {
 	var resp oauth2.Token
 	resp.AccessToken = "bbbnn"
 	h.TokenMap["123456"] = &resp
-	h.handleGetContent(w, r)
+	h.HandleGetContent(w, r)
 	testMode = false
 }
 
@@ -224,7 +224,7 @@ func TestHandler_handleDeleteContent(t *testing.T) {
 	var resp oauth2.Token
 	resp.AccessToken = "bbbnn"
 	h.TokenMap["123456"] = &resp
-	h.handleDeleteContent(w, r)
+	h.HandleDeleteContent(w, r)
 	testMode = false
 }
 
@@ -245,6 +245,6 @@ func TestHandler_handleDeleteContent2(t *testing.T) {
 	var resp oauth2.Token
 	resp.AccessToken = "bbbnn"
 	h.TokenMap["123456"] = &resp
-	h.handleDeleteContent(w, r)
+	h.HandleDeleteContent(w, r)
 	testMode = false
 }

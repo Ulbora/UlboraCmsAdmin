@@ -8,10 +8,11 @@ and open the template in the editor.
 {{template "header"}}
 
 <body>
+  {{template "navbarLogin" .}}
   <div class="login-form">
     <form method="POST" class="ui form" action="/loginUser">
       <h2 class="ui dividing header">Enter Client ID</h2>
-           <div class="field">
+      <div class="field">
         <label>Client ID</label>
         <input type="text" name="clientId" required>
       </div>
@@ -19,4 +20,5 @@ and open the template in the editor.
     </form>
   </div>
 </body>
+{{template "footer"}}
 </html>

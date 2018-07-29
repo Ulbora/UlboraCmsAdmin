@@ -39,5 +39,5 @@ const (
 	authCodeRedirectURI = "/tokenHandler"
 	implicitRedirectURI = "/tokenImplicitHandler"
 	apiGatewayClient    = "616"
-	apiGatewayKey       = "TDjlPxNIUkqxeovPbVwQEdleWOgPqBpWZSS"
+	apiGatewayKey       = "DqkNjqPhWbBOkMgnCNjWhJkrKRHoIPDdezo"
 )

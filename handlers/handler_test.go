@@ -242,3 +242,20 @@ func TestHandler_getImageHost3(t *testing.T) {
 	}
 	os.Setenv("IMAGE_HOST", "")
 }
+
+func TestHandler_GetCredentialsSecret(t *testing.T) {
+	var h Handler
+	h.GetCredentialsSecret("125")
+	if h.ClientCredSecret != "125" {
+		t.Fail()
+	}
+}
+
+func TestHandler_GetCredentialsSecret2(t *testing.T) {
+	os.Setenv("OAUTH2_CREDENTIALS_SECRET", "555444")
+	var h Handler
+	h.GetCredentialsSecret("")
+	if h.ClientCredSecret != "555444" {
+		t.Fail()
+	}
+}

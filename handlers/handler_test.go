@@ -204,7 +204,7 @@ func TestHandler_getGatewayAPIClient2(t *testing.T) {
 
 func TestHandler_getGatewayAPIKey(t *testing.T) {
 	k := getGatewayAPIKey()
-	if k != "TDjlPxNIUkqxeovPbVwQEdleWOgPqBpWZSS" {
+	if k != "DqkNjqPhWbBOkMgnCNjWhJkrKRHoIPDdezo" {
 		t.Fail()
 	}
 }

@@ -43,8 +43,8 @@ func (h *Handler) HandleAddContent(w http.ResponseWriter, r *http.Request) {
 
 	loggedIn := session.Values["userLoggenIn"]
 	token := h.getToken(w, r)
-	fmt.Print("loggedIn in addcontent: ")
-	fmt.Println(loggedIn)
+	//fmt.Print("loggedIn in addcontent: ")
+	//fmt.Println(loggedIn)
 	if loggedIn == nil || !loggedIn.(bool) || token == nil {
 		h.loginImplicit(w, r)
 	} else {
@@ -73,19 +73,19 @@ func (h *Handler) HandleNewContent(w http.ResponseWriter, r *http.Request) {
 	session := h.getSession(w, r)
 	loggedIn := session.Values["userLoggenIn"]
 	token := h.getToken(w, r)
-	fmt.Print("loggedIn in newcontent: ")
-	fmt.Println(loggedIn)
+	//fmt.Print("loggedIn in newcontent: ")
+	//fmt.Println(loggedIn)
 	if loggedIn == nil || !loggedIn.(bool) || token == nil {
 		h.loginImplicit(w, r)
 	} else {
 		clientID := session.Values["clientId"].(string)
 		content := r.FormValue("content")
-		fmt.Print("content: ")
-		fmt.Println(content)
+		//fmt.Print("content: ")
+		//fmt.Println(content)
 
 		title := r.FormValue("title")
-		fmt.Print("title: ")
-		fmt.Println(title)
+		//fmt.Print("title: ")
+		//fmt.Println(title)
 
 		author := r.FormValue("author")
 		//fmt.Print("author: ")
@@ -133,8 +133,8 @@ func (h *Handler) HandleNewContent(w http.ResponseWriter, r *http.Request) {
 		c.Host = getContentHost()
 		var res *services.Response
 		res = c.AddContent(&ct)
-		fmt.Print("res: ")
-		fmt.Println(res)
+		//fmt.Print("res: ")
+		//fmt.Println(res)
 		// if res.Code == 401 {
 		// 	// get new token
 		// 	getRefreshToken(w, r)
@@ -143,13 +143,6 @@ func (h *Handler) HandleNewContent(w http.ResponseWriter, r *http.Request) {
 
 		//fmt.Println(res)
 		if res.Success || testMode {
-			// var c services.ContentPageService
-			// c.ClientID = getAuthCodeClient()
-			// c.APIKey = getGatewayAPIKey()
-			// c.Token = token.AccessToken
-			// c.Host = getContentHost()
-			// c.PageSize = 100
-			// c.ClearPage(category)
 			http.Redirect(w, r, "/", http.StatusFound)
 		} else {
 			http.Redirect(w, r, "/addContent", http.StatusFound)
@@ -208,8 +201,8 @@ func (h *Handler) HandleUpdateContent(w http.ResponseWriter, r *http.Request) {
 		//fmt.Println(desc)
 
 		archived := r.FormValue("archived")
-		fmt.Print("archived: ")
-		fmt.Println(archived)
+		//fmt.Print("archived: ")
+		//fmt.Println(archived)
 
 		var ct services.Content
 		ct.ID = id
@@ -250,13 +243,6 @@ func (h *Handler) HandleUpdateContent(w http.ResponseWriter, r *http.Request) {
 		// }
 		//fmt.Println(res)
 		if res.Success || testMode {
-			// var c services.ContentPageService
-			// c.ClientID = getAuthCodeClient()
-			// c.APIKey = getGatewayAPIKey()
-			// c.Token = token.AccessToken
-			// c.Host = getContentHost()
-			// c.PageSize = 100
-			// c.ClearPage(category)
 			http.Redirect(w, r, "/", http.StatusFound)
 		} else {
 			fmt.Println("Content update failed")
@@ -311,18 +297,12 @@ func (h *Handler) HandleDeleteContent(w http.ResponseWriter, r *http.Request) {
 	session := h.getSession(w, r)
 	loggedIn := session.Values["userLoggenIn"]
 	token := h.getToken(w, r)
-
 	//loggedIn := session.Values["userLoggenIn"]
 	if loggedIn == nil || !loggedIn.(bool) || token == nil {
 		h.loginImplicit(w, r)
 	} else {
 		id := r.URL.Query().Get("id")
 		clientID := session.Values["clientId"].(string)
-		//vars := mux.Vars(r)
-		//id := vars["id"]
-		//page := vars["cat"]
-		//fmt.Print("page: ")
-		//fmt.Println(page)
 		var c services.ContentService
 		c.ClientID = clientID
 		c.APIClient = getGatewayAPIClient()
@@ -344,19 +324,6 @@ func (h *Handler) HandleDeleteContent(w http.ResponseWriter, r *http.Request) {
 			fmt.Print("code: ")
 			fmt.Println(res.Code)
 		}
-		// else {
-		// 	// add code to delete cached page====================================
-		// 	// var c services.ContentPageService
-		// 	// c.ClientID = getAuthCodeClient()
-		// 	// c.APIKey = getGatewayAPIKey()
-		// 	// c.Token = token.AccessToken
-		// 	// c.Host = getContentHost()
-		// 	// c.PageSize = 100
-		// 	// //res2 := c.DeletePage(page)
-		// 	// c.DeletePage(page)
-		// 	//fmt.Print("delete res: ")
-		// 	//fmt.Println(res2)
-		// }
 		http.Redirect(w, r, "/", http.StatusFound)
 	}
 }

@@ -72,7 +72,7 @@ func (i *ImageService) AddImage(image *UploadedFile) *ImageResponse {
 	if !fail {
 		req.Header.Set("Content-Type", "application/json")
 		req.Header.Set("Authorization", "Bearer "+i.Token)
-		req.Header.Set("u-client-id", i.ClientID)
+		req.Header.Set("u-client-id", i.APIClient)
 		req.Header.Set("clientId", i.ClientID)
 		req.Header.Set("u-api-key", i.APIKey)
 		code := cm.ProcessServiceCall(req, &rtn)
@@ -122,7 +122,7 @@ func (i *ImageService) GetList() *[]Image {
 	req, fail := cm.GetRequest(gURL, http.MethodGet, nil)
 	if !fail {
 		req.Header.Set("Authorization", "Bearer "+i.Token)
-		req.Header.Set("u-client-id", i.ClientID)
+		req.Header.Set("u-client-id", i.APIClient)
 		req.Header.Set("clientId", i.ClientID)
 		req.Header.Set("u-api-key", i.APIKey)
 		cm.ProcessServiceCall(req, &rtn)
@@ -167,7 +167,7 @@ func (i *ImageService) DeleteImage(id string) *ImageResponse {
 	if !fail {
 		req.Header.Set("Content-Type", "application/json")
 		req.Header.Set("Authorization", "Bearer "+i.Token)
-		req.Header.Set("u-client-id", i.ClientID)
+		req.Header.Set("u-client-id", i.APIClient)
 		req.Header.Set("clientId", i.ClientID)
 		req.Header.Set("u-api-key", i.APIKey)
 		code := cm.ProcessServiceCall(req, &rtn)

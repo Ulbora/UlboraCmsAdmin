@@ -30,13 +30,6 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
-	//"strconv"
-	// "fmt"
-	// "strconv"
-	// "strings"
-	// //"fmt"
-	// //"fmt"
-	// "net/http"
 )
 
 //HandleAddImage HandleAddImage
@@ -63,17 +56,17 @@ func (h *Handler) HandleImagerUpload(w http.ResponseWriter, r *http.Request) {
 	} else {
 		clientID := session.Values["clientId"].(string)
 		name := r.FormValue("name")
-		fmt.Print("name: ")
-		fmt.Println(name)
+		//fmt.Print("name: ")
+		//fmt.Println(name)
 		r.ParseMultipartForm(2000000)
 		// err := r.ParseMultipartForm(2000000)
 		// if err != nil {
 		// 	fmt.Println(err)
 		// }
-		fmt.Println("before file: ")
+		//fmt.Println("before file: ")
 		file, handler, _ := r.FormFile("image")
-		fmt.Print("file: ")
-		fmt.Println(file)
+		//fmt.Print("file: ")
+		//fmt.Println(file)
 		// file, handler, err := r.FormFile("image")
 		// if err != nil {
 		// 	fmt.Println(err)
@@ -100,14 +93,12 @@ func (h *Handler) HandleImagerUpload(w http.ResponseWriter, r *http.Request) {
 
 		data, _ := ioutil.ReadAll(file)
 
-		//fmt.Println(data)
+		// fmt.Print("file data: ")
+		// fmt.Println(data)
 
-		//fmt.Print("file size: ")
-		//fmt.Println(size)
+		// fmt.Print("file size: ")
+		// fmt.Println(size)
 
-		//sEnc := b64.StdEncoding.EncodeToString(data)
-		//fmt.Print("file data: ")
-		//fmt.Println(data)
 		var i services.ImageService
 		i.ClientID = clientID
 		i.APIClient = getGatewayAPIClient()
@@ -119,8 +110,12 @@ func (h *Handler) HandleImagerUpload(w http.ResponseWriter, r *http.Request) {
 		img.OriginalFileName = handler.Filename
 		img.Size = size
 		img.FileData = data
+		//fmt.Print("file img: ")
+		//fmt.Println(img)
 		var res *services.ImageResponse
 		res = i.AddImage(&img)
+		//fmt.Print("file res: ")
+		//fmt.Println(res)
 		//res := i.AddImage(&img)
 		if res.Success || testMode {
 			http.Redirect(w, r, "/", http.StatusFound)
@@ -164,7 +159,7 @@ func (h *Handler) HandleDeleteImage(w http.ResponseWriter, r *http.Request) {
 		h.loginImplicit(w, r)
 	} else {
 		clientID := session.Values["clientId"].(string)
-		id := r.FormValue("id")
+		id := r.URL.Query().Get("id") // r.FormValue("id")
 		//id, _ := strconv.ParseInt(idStr, 10, 0)
 		var i services.ImageService
 		i.ClientID = clientID

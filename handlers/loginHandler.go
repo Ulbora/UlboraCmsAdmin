@@ -76,11 +76,11 @@ func (h *Handler) HandleImplicitLogin(w http.ResponseWriter, r *http.Request) {
 	//session.Values["testBool"] = true
 	serr := session.Save(r, w)
 	fmt.Println(serr)
-	fmt.Print("clientId: ")
-	fmt.Println(clientID)
+	//fmt.Print("clientId: ")
+	//fmt.Println(clientID)
 
-	fmt.Print("clientId from session: ")
-	fmt.Println(session.Values["clientId"].(string))
+	//fmt.Print("clientId from session: ")
+	//fmt.Println(session.Values["clientId"].(string))
 
 	var a oauth2.ImplicitAuthorize
 	a.ClientID = clientID
@@ -90,12 +90,13 @@ func (h *Handler) HandleImplicitLogin(w http.ResponseWriter, r *http.Request) {
 	a.State = authCodeState
 	a.Req = r
 	a.Res = w
-	resp := a.ImplicitAuthorize()
+	//resp := a.ImplicitAuthorize()
+	a.ImplicitAuthorize()
 	//fmt.Print("RedirectURI: ")
 	//fmt.Println(a.RedirectURI)
 	//if resp != true {
-	fmt.Print("Authorize: ")
-	fmt.Println(resp)
+	//fmt.Print("Authorize: ")
+	//fmt.Println(resp)
 	//}
 	//fmt.Print("Resp: ")
 	//fmt.Println(resp)
@@ -127,9 +128,9 @@ func (h *Handler) HandleImplicitToken(w http.ResponseWriter, r *http.Request) {
 		//fmt.Print("session id: ")
 		//fmt.Println(session.ID)
 		err := session.Save(r, w)
-		loggedIn := session.Values["userLoggenIn"]
-		fmt.Print("loggedIn in index: ")
-		fmt.Println(loggedIn)
+		//loggedIn := session.Values["userLoggenIn"]
+		//fmt.Print("loggedIn in index: ")
+		//fmt.Println(loggedIn)
 		fmt.Println(err)
 		http.Redirect(w, r, "/", http.StatusFound)
 		// decode token and get user id

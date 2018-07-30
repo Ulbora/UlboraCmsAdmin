@@ -41,7 +41,7 @@ func main() {
 	//h.GetCredentialsSecret(credSecret)
 	h.Templates = template.Must(template.ParseFiles("./static/index.html", "./static/login.html", "./static/header.html",
 		"./static/navbarLogin.html", "./static/footer.html", "./static/navbar.html", "./static/addContent.html",
-		"./static/updateContent.html"))
+		"./static/updateContent.html", "./static/imageUpload.html", "./static/images.html"))
 	router := mux.NewRouter()
 
 	router.HandleFunc("/", h.HandleAdminIndex).Methods("GET")
@@ -55,10 +55,10 @@ func main() {
 	router.HandleFunc("/updateContent", h.HandleUpdateContent).Methods("POST")
 	router.HandleFunc("/deleteContent", h.HandleDeleteContent).Methods("GET")
 
-	router.HandleFunc("/addImage", h.HandleAddImage).Methods("POST")
-	router.HandleFunc("/admin/uploadImage", h.HandleImagerUpload).Methods("POST")
-	router.HandleFunc("/admin/images", h.HandleImages).Methods("GET")
-	router.HandleFunc("/admin/deleteImage/{id}", h.HandleDeleteImage).Methods("GET")
+	router.HandleFunc("/addImage", h.HandleAddImage).Methods("GET")
+	router.HandleFunc("/uploadImage", h.HandleImagerUpload).Methods("POST")
+	router.HandleFunc("/images", h.HandleImages).Methods("GET")
+	router.HandleFunc("/deleteImage", h.HandleDeleteImage).Methods("GET")
 
 	router.PathPrefix("/").Handler(http.FileServer(http.Dir("./static/")))
 

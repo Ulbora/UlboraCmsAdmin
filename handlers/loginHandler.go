@@ -68,12 +68,7 @@ func (h *Handler) HandleImplicitLogin(w http.ResponseWriter, r *http.Request) {
 	h.Sess.InitSessionStore(w, r)
 	clientID := r.FormValue("clientId")
 	session := h.getSession(w, r)
-	// if err != nil {
-	// 	fmt.Println(err)
-	// 	http.Error(w, err.Error(), http.StatusInternalServerError)
-	// } else {
 	session.Values["clientId"] = clientID
-	//session.Values["testBool"] = true
 	serr := session.Save(r, w)
 	fmt.Println(serr)
 	//fmt.Print("clientId: ")
@@ -107,18 +102,8 @@ func (h *Handler) HandleImplicitLogin(w http.ResponseWriter, r *http.Request) {
 func (h *Handler) HandleImplicitToken(w http.ResponseWriter, r *http.Request) {
 	token := r.URL.Query().Get("token")
 	state := r.URL.Query().Get("state")
-	//fmt.Println("handle token")
 	if state == authCodeState && token != "" {
-		//if token != "" {
-		//fmt.Println(token)
-		//token = resp
 		session := h.getSession(w, r)
-		// if err != nil {
-		// 	fmt.Println(err)
-		// 	http.Error(w, err.Error(), http.StatusInternalServerError)
-		// } else {
-		//session.Values["clientId"] = "616"
-		//session.Values["testBool"] = true
 		session.Values["userLoggenIn"] = true
 		var accKey = generateTokenKey()
 		session.Values["accessTokenKey"] = accKey
@@ -133,8 +118,5 @@ func (h *Handler) HandleImplicitToken(w http.ResponseWriter, r *http.Request) {
 		//fmt.Println(loggedIn)
 		fmt.Println(err)
 		http.Redirect(w, r, "/", http.StatusFound)
-		// decode token and get user id
-		//}
-		//}
 	}
 }

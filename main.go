@@ -9,18 +9,14 @@ import (
 	"html/template"
 	"net/http"
 	"os"
-	//"os"
 )
 
 var h hand.Handler
 
 var s usession.Session
 
-//var token *oauth2.Token
 var tokenMap map[string]*oauth2.Token
 var credentialToken *oauth2.Token
-
-//var templates =
 
 func main() {
 	s.MaxAge = sessingTimeToLive
@@ -33,12 +29,6 @@ func main() {
 	h.Sess = s
 	h.TokenMap = make(map[string]*oauth2.Token)
 
-	// var credSecret string
-	// if len(os.Args) == 2 {
-	// 	credSecret = os.Args[1]
-	// }
-
-	//h.GetCredentialsSecret(credSecret)
 	h.Templates = template.Must(template.ParseFiles("./static/index.html", "./static/login.html", "./static/header.html",
 		"./static/navbarLogin.html", "./static/footer.html", "./static/navbar.html", "./static/addContent.html",
 		"./static/updateContent.html", "./static/imageUpload.html", "./static/images.html"))

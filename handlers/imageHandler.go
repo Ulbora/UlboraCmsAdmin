@@ -59,10 +59,6 @@ func (h *Handler) HandleImagerUpload(w http.ResponseWriter, r *http.Request) {
 		//fmt.Print("name: ")
 		//fmt.Println(name)
 		r.ParseMultipartForm(2000000)
-		// err := r.ParseMultipartForm(2000000)
-		// if err != nil {
-		// 	fmt.Println(err)
-		// }
 		//fmt.Println("before file: ")
 		file, handler, _ := r.FormFile("image")
 		//fmt.Print("file: ")
@@ -116,7 +112,6 @@ func (h *Handler) HandleImagerUpload(w http.ResponseWriter, r *http.Request) {
 		res = i.AddImage(&img)
 		//fmt.Print("file res: ")
 		//fmt.Println(res)
-		//res := i.AddImage(&img)
 		if res.Success || testMode {
 			http.Redirect(w, r, "/", http.StatusFound)
 		} else {
@@ -142,9 +137,7 @@ func (h *Handler) HandleImages(w http.ResponseWriter, r *http.Request) {
 		i.APIKey = getGatewayAPIKey()
 		i.Host = getImageHost()
 		i.Token = tokeni.AccessToken
-
 		res := i.GetList()
-
 		h.Templates.ExecuteTemplate(w, "images.html", &res)
 	}
 }
@@ -159,8 +152,7 @@ func (h *Handler) HandleDeleteImage(w http.ResponseWriter, r *http.Request) {
 		h.loginImplicit(w, r)
 	} else {
 		clientID := session.Values["clientId"].(string)
-		id := r.URL.Query().Get("id") // r.FormValue("id")
-		//id, _ := strconv.ParseInt(idStr, 10, 0)
+		id := r.URL.Query().Get("id")
 		var i services.ImageService
 		i.ClientID = clientID
 		i.APIClient = getGatewayAPIClient()
@@ -169,8 +161,6 @@ func (h *Handler) HandleDeleteImage(w http.ResponseWriter, r *http.Request) {
 		i.Token = token.AccessToken
 		var res *services.ImageResponse
 		res = i.DeleteImage(id)
-
-		//res := i.DeleteImage(id)
 		if !res.Success || testMode {
 			fmt.Println("Delete image failed on ID: " + id)
 			fmt.Print("code: ")

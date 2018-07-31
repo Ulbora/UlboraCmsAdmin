@@ -28,8 +28,6 @@ package handlers
 import (
 	services "UlboraCmsAdmin/services"
 	//"fmt"
-	//"fmt"
-	//"fmt"
 	"net/http"
 )
 
@@ -40,11 +38,9 @@ func (h *Handler) HandleAdminIndex(w http.ResponseWriter, r *http.Request) {
 	loggedIn := session.Values["userLoggenIn"]
 	token := h.getToken(w, r)
 	//fmt.Print("loggedIn in index: ")
-	//fmt.Println(loggedIn)
 	// fmt.Print("token in index: ")
 	// fmt.Println(token)
 	if loggedIn == nil || !loggedIn.(bool) || token == nil {
-		//authorize(w, r)
 		h.loginImplicit(w, r)
 	} else {
 		clientID := session.Values["clientId"].(string)

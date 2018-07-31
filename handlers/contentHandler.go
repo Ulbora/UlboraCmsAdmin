@@ -37,10 +37,8 @@ import (
 
 //HandleAddContent HandleAddContent
 func (h *Handler) HandleAddContent(w http.ResponseWriter, r *http.Request) {
-
 	h.Sess.InitSessionStore(w, r)
 	session := h.getSession(w, r)
-
 	loggedIn := session.Values["userLoggenIn"]
 	token := h.getToken(w, r)
 	//fmt.Print("loggedIn in addcontent: ")
@@ -53,10 +51,6 @@ func (h *Handler) HandleAddContent(w http.ResponseWriter, r *http.Request) {
 		i.ClientID = clientID
 		i.APIClient = getGatewayAPIClient()
 		i.APIKey = getGatewayAPIKey()
-		// 		c.Host = getContentHost()
-		//i.APIKey = getGatewayAPIKey()
-		//i.UserID = getHashedUser()
-		//i.Hashed = "true"
 		i.Token = token.AccessToken
 		//fmt.Println(token.AccessToken)
 		i.Host = getImageHost()
@@ -127,20 +121,12 @@ func (h *Handler) HandleNewContent(w http.ResponseWriter, r *http.Request) {
 		c.ClientID = clientID
 		c.APIClient = getGatewayAPIClient()
 		c.APIKey = getGatewayAPIKey()
-		//c.UserID = getHashedUser()
-		//c.Hashed = "true"
+
 		c.Token = token.AccessToken
 		c.Host = getContentHost()
 		var res *services.Response
 		res = c.AddContent(&ct)
 		//fmt.Print("res: ")
-		//fmt.Println(res)
-		// if res.Code == 401 {
-		// 	// get new token
-		// 	getRefreshToken(w, r)
-		// 	res = c.AddContent(&ct)
-		// }
-
 		//fmt.Println(res)
 		if res.Success || testMode {
 			http.Redirect(w, r, "/", http.StatusFound)
@@ -228,19 +214,14 @@ func (h *Handler) HandleUpdateContent(w http.ResponseWriter, r *http.Request) {
 		c.ClientID = clientID
 		c.APIClient = getGatewayAPIClient()
 		c.APIKey = getGatewayAPIKey()
-		// c.UserID = getHashedUser()
-		// c.Hashed = "true"
+
 		c.Token = token.AccessToken
 		c.Host = getContentHost()
 
 		var res *services.Response
 
 		res = c.UpdateContent(&ct)
-		// if res.Code == 401 {
-		// 	// get new token
-		// 	getRefreshToken(w, r)
-		// 	res = c.UpdateContent(&ct)
-		// }
+
 		//fmt.Println(res)
 		if res.Success || testMode {
 			http.Redirect(w, r, "/", http.StatusFound)
@@ -261,8 +242,7 @@ func (h *Handler) HandleGetContent(w http.ResponseWriter, r *http.Request) {
 		h.loginImplicit(w, r)
 	} else {
 		clientID := session.Values["clientId"].(string)
-		// vars := mux.Vars(r)
-		//id := vars["id"]
+
 		id := r.URL.Query().Get("id")
 		var c services.ContentService
 		c.ClientID = clientID
@@ -275,8 +255,7 @@ func (h *Handler) HandleGetContent(w http.ResponseWriter, r *http.Request) {
 		i.ClientID = clientID
 		i.APIClient = getGatewayAPIClient()
 		i.APIKey = getGatewayAPIKey()
-		//i.UserID = getHashedUser()
-		//i.Hashed = "true"
+
 		i.Token = token.AccessToken
 		//fmt.Println(token.AccessToken)
 		i.Host = getImageHost()
@@ -297,7 +276,6 @@ func (h *Handler) HandleDeleteContent(w http.ResponseWriter, r *http.Request) {
 	session := h.getSession(w, r)
 	loggedIn := session.Values["userLoggenIn"]
 	token := h.getToken(w, r)
-	//loggedIn := session.Values["userLoggenIn"]
 	if loggedIn == nil || !loggedIn.(bool) || token == nil {
 		h.loginImplicit(w, r)
 	} else {
@@ -307,18 +285,13 @@ func (h *Handler) HandleDeleteContent(w http.ResponseWriter, r *http.Request) {
 		c.ClientID = clientID
 		c.APIClient = getGatewayAPIClient()
 		c.APIKey = getGatewayAPIKey()
-		// c.UserID = getHashedUser()
-		// c.Hashed = "true"
+
 		c.Token = token.AccessToken
 		c.Host = getContentHost()
 		//res := c.DeleteContent(id)
 		var res *services.Response
 		res = c.DeleteContent(id)
-		// if res.Code == 401 {
-		// 	// get new token
-		// 	getRefreshToken(w, r)
-		// 	res = c.DeleteContent(id)
-		// }
+
 		if !res.Success {
 			fmt.Println("Delete content failed on ID: " + id)
 			fmt.Print("code: ")

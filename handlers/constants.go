@@ -26,15 +26,10 @@ package handlers
 */
 
 const (
-	// userSession       = "ugw-user-session"
-	// sessingTimeToLive = (120 * 60) //120 minutes -- 2 hours
 
 	//http
 	schemeDefault = "http://"
 
-	//OAuth Auth Code
-	// authCodeClient      = "616"
-	// authCodeSecret      = "F56NtZOAehMJd4zWNIbogd9iulrP8mxq9hDI3Vkxnop3Lspdix"
 	authCodeState       = "ghh66555h"
 	authCodeRedirectURI = "/tokenHandler"
 	implicitRedirectURI = "/tokenImplicitHandler"

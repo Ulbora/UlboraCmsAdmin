@@ -39,10 +39,6 @@ func generateAPIKey() string {
 	return RandStringRunes(35)
 }
 
-// func generateClientSecret() string {
-// 	return RandStringRunes(50)
-// }
-
 //**************Random Generator******************************
 func init() {
 	rand.Seed(time.Now().UnixNano())

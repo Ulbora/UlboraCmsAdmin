@@ -25,7 +25,7 @@
             </thead>
             <tbody>
                 {{range .}}
-                <tr onclick="window.location.href='/getContent/{{.ID}}'">
+                <tr onclick="window.location.href='/getContent?id={{.ID}}'">
                     <td>
                         <a href="/getContent?id={{.ID}}">{{.Title}} </a>
                     </td>

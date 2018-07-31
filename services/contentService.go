@@ -2,12 +2,9 @@ package services
 
 import (
 	cm "UlboraCmsAdmin/common"
-	//"bytes"
 	b64 "encoding/base64"
-	//"encoding/json"
 	"fmt"
 	"html/template"
-	//"log"
 	"net/http"
 	"time"
 )
@@ -64,17 +61,9 @@ func (c *ContentService) AddContent(content *Content) *Response {
 	var addURL = c.Host + "/rs/content/add"
 	content.Text = b64.StdEncoding.EncodeToString([]byte(content.Text))
 	//fmt.Println(content.Text)
-	//aJSON, err := json.Marshal(content)
 	aJSON := cm.GetJSONEncode(content)
 	reqa, fail := cm.GetRequest(addURL, http.MethodPost, aJSON)
-	// if err != nil {
-	// 	fmt.Println(err)
-	// } else {
-	//req, rErr := http.NewRequest("POST", addURL, bytes.NewBuffer(aJSON))
-	// if rErr != nil {
-	// 	fmt.Print("request err: ")
-	// 	fmt.Println(rErr)
-	// } else {
+
 	if !fail {
 		reqa.Header.Set("Content-Type", "application/json")
 		reqa.Header.Set("Authorization", "Bearer "+c.Token)
@@ -86,24 +75,7 @@ func (c *ContentService) AddContent(content *Content) *Response {
 
 		code := cm.ProcessServiceCall(reqa, &rtn)
 		rtn.Code = code
-		//client := &http.Client{}
-		//resp, cErr := client.Do(req)
-		//fmt.Print("resp: ")
-		//fmt.Println(resp)
-		// if cErr != nil {
-		// 	fmt.Print("Content Service Add err: ")
-		// 	fmt.Println(cErr)
-		// } else {
-		// 	defer resp.Body.Close()
-		// 	decoder := json.NewDecoder(resp.Body)
-		// 	error := decoder.Decode(&rtn)
-		// 	if error != nil {
-		// 		log.Println(error.Error())
-		// 	}
-		// 	rtn.Code = resp.StatusCode
-		// }
 	}
-	//}
 	return rtn
 }
 
@@ -127,42 +99,6 @@ func (c *ContentService) UpdateContent(content *Content) *Response {
 		code := cm.ProcessServiceCall(requ, &rtn)
 		rtn.Code = code
 	}
-	// aJSON, err := json.Marshal(content)
-	// if err != nil {
-	// 	fmt.Print("marchal err: ")
-	// 	fmt.Println(err)
-	// } else {
-	// 	//fmt.Print("Content Service before req: ")
-	// 	req, rErr := http.NewRequest("PUT", upURL, bytes.NewBuffer(aJSON))
-	// 	if rErr != nil {
-	// 		fmt.Print("request err: ")
-	// 		fmt.Println(rErr)
-	// 	} else {
-	// 		req.Header.Set("Content-Type", "application/json")
-	// 		req.Header.Set("Authorization", "Bearer "+c.Token)
-	// 		req.Header.Set("u-client-id", c.ClientID)
-	// 		req.Header.Set("clientId", c.ClientID)
-	// 		req.Header.Set("userId", c.UserID)
-	// 		req.Header.Set("hashed", c.Hashed)
-	// 		req.Header.Set("u-api-key", c.APIKey)
-	// 		//fmt.Print("Content Service before rest call: ")
-	// 		client := &http.Client{}
-	// 		resp, cErr := client.Do(req)
-	// 		if cErr != nil {
-	// 			fmt.Print("Content Service Update err: ")
-	// 			fmt.Println(cErr)
-	// 		} else {
-	// 			defer resp.Body.Close()
-	// 			decoder := json.NewDecoder(resp.Body)
-	// 			error := decoder.Decode(&rtn)
-	// 			if error != nil {
-	// 				fmt.Print("Content Service Update decode err: ")
-	// 				log.Println(error.Error())
-	// 			}
-	// 			rtn.Code = resp.StatusCode
-	// 		}
-	// 	}
-	// }
 	//fmt.Print("Content Service Update leaving: ")
 	return rtn
 }
@@ -186,39 +122,6 @@ func (c *ContentService) UpdateContentHits(content *Content) *Response {
 		code := cm.ProcessServiceCall(reqh, &rtn)
 		rtn.Code = code
 	}
-
-	// aJSON, err := json.Marshal(content)
-	// if err != nil {
-	// 	fmt.Println(err)
-	// } else {
-	// 	req, rErr := http.NewRequest("PUT", upURL, bytes.NewBuffer(aJSON))
-	// 	if rErr != nil {
-	// 		fmt.Print("request err: ")
-	// 		fmt.Println(rErr)
-	// 	} else {
-	// 		req.Header.Set("Content-Type", "application/json")
-	// 		req.Header.Set("Authorization", "Bearer "+c.Token)
-	// 		req.Header.Set("u-client-id", c.ClientID)
-	// 		req.Header.Set("clientId", c.ClientID)
-	// 		req.Header.Set("userId", c.UserID)
-	// 		req.Header.Set("hashed", c.Hashed)
-	// 		req.Header.Set("u-api-key", c.APIKey)
-	// 		client := &http.Client{}
-	// 		resp, cErr := client.Do(req)
-	// 		if cErr != nil {
-	// 			fmt.Print("Content Service Update err: ")
-	// 			fmt.Println(cErr)
-	// 		} else {
-	// 			defer resp.Body.Close()
-	// 			decoder := json.NewDecoder(resp.Body)
-	// 			error := decoder.Decode(&rtn)
-	// 			if error != nil {
-	// 				log.Println(error.Error())
-	// 			}
-	// 			rtn.Code = resp.StatusCode
-	// 		}
-	// 	}
-	// }
 	return rtn
 }
 
@@ -226,8 +129,6 @@ func (c *ContentService) UpdateContentHits(content *Content) *Response {
 func (c *ContentService) GetContent(id string, clientID string) *Content {
 	var rtn = new(Content)
 	var gURL = c.Host + "/rs/content/get/" + id + "/" + clientID
-
-	//aJSON := cm.GetJSONEncode(content)
 	req, fail := cm.GetRequest(gURL, http.MethodGet, nil)
 	if !fail {
 		req.Header.Set("u-client-id", c.APIClient)
@@ -235,44 +136,7 @@ func (c *ContentService) GetContent(id string, clientID string) *Content {
 		req.Header.Set("clientId", c.ClientID)
 		cm.ProcessServiceCall(req, &rtn)
 		rtn.Text = decodeB64String(rtn.Text)
-		// txt, err := b64.StdEncoding.DecodeString(rtn.Text)
-		// if err != nil {
-		// 	fmt.Println(err)
-		// } else {
-		// 	rtn.Text = string(txt)
-		// }
-		//rtn.Code = code
 	}
-	//fmt.Println(gURL)
-	//resp, err := http.Get(gURL)
-	// req, rErr := http.NewRequest("GET", gURL, nil)
-	// if rErr != nil {
-	// 	fmt.Print("request err: ")
-	// 	fmt.Println(rErr)
-	// } else {
-	// 	req.Header.Set("u-client-id", c.ClientID)
-	// 	req.Header.Set("u-api-key", c.APIKey)
-	// 	req.Header.Set("clientId", c.ClientID)
-	// 	client := &http.Client{}
-	// 	resp, cErr := client.Do(req)
-	// 	if cErr != nil {
-	// 		fmt.Print("Content Service read err: ")
-	// 		fmt.Println(cErr)
-	// 	} else {
-	// 		defer resp.Body.Close()
-	// 		decoder := json.NewDecoder(resp.Body)
-	// 		error := decoder.Decode(&rtn)
-	// 		if error != nil {
-	// 			log.Println(error.Error())
-	// 		}
-	// 		txt, err := b64.StdEncoding.DecodeString(rtn.Text)
-	// 		if err != nil {
-	// 			fmt.Println(err)
-	// 		} else {
-	// 			rtn.Text = string(txt)
-	// 		}
-	// 	}
-	// }
 	return rtn
 }
 
@@ -289,56 +153,12 @@ func (c *ContentService) GetContentList(clientID string) *[]Content {
 		cm.ProcessServiceCall(req, &rtn)
 		for r := range rtn {
 			rtn[r].Text = decodeB64String(rtn[r].Text)
-			// txt, err := b64.StdEncoding.DecodeString(rtn[r].Text)
-			// if err != nil {
-			// 	fmt.Println(err)
-			// } else {
-			// 	rtn[r].Text = string(txt)
-			// 	//fmt.Println(rtn[r].Text)
-			// }
 			//fmt.Println(rtn[r].ModifiedDate.Year())
 			if rtn[r].ModifiedDate.Year() != 1 {
 				rtn[r].UseModifiedDate = true
 			}
 		}
 	}
-
-	// req, rErr := http.NewRequest("GET", gURL, nil)
-	// if rErr != nil {
-	// 	fmt.Print("request err: ")
-	// 	fmt.Println(rErr)
-	// } else {
-	// 	req.Header.Set("u-client-id", c.ClientID)
-	// 	req.Header.Set("u-api-key", c.APIKey)
-	// 	req.Header.Set("clientId", c.ClientID)
-	// 	client := &http.Client{}
-	// 	resp, cErr := client.Do(req)
-	// 	if cErr != nil {
-	// 		fmt.Print("Content Service read err: ")
-	// 		fmt.Println(cErr)
-	// 	} else {
-	// 		defer resp.Body.Close()
-	// 		//var cont = new(Content)
-	// 		decoder := json.NewDecoder(resp.Body)
-	// 		error := decoder.Decode(&rtn)
-	// 		if error != nil {
-	// 			log.Println(error.Error())
-	// 		}
-	// 		for r := range rtn {
-	// 			txt, err := b64.StdEncoding.DecodeString(rtn[r].Text)
-	// 			if err != nil {
-	// 				fmt.Println(err)
-	// 			} else {
-	// 				rtn[r].Text = string(txt)
-	// 				//fmt.Println(rtn[r].Text)
-	// 			}
-	// 			//fmt.Println(rtn[r].ModifiedDate.Year())
-	// 			if rtn[r].ModifiedDate.Year() != 1 {
-	// 				rtn[r].UseModifiedDate = true
-	// 			}
-	// 		}
-	// 	}
-	//}
 	return &rtn
 }
 
@@ -347,7 +167,6 @@ func (c *ContentService) GetContentListCategory(clientID string, category string
 	var rtn = make([]Content, 0)
 	var pghead = new(PageHead)
 	var gURL = c.Host + "/rs/content/list/" + clientID + "/" + category
-
 	req, fail := cm.GetRequest(gURL, http.MethodGet, nil)
 	if !fail {
 		req.Header.Set("u-client-id", c.APIClient)
@@ -365,74 +184,11 @@ func (c *ContentService) GetContentListCategory(clientID string, category string
 				pghead.MetaKeyWords = rtn[r].MetaKeyWords
 				pghead.Title = rtn[r].Title
 			}
-			// if err != nil {
-			// 	fmt.Println(err)
-			// } else {
-			// 	rtn[r].Text = string(txt)
-			// 	//fmt.Println(rtn[r].Text)
-			// 	rtn[r].TextHTML = template.HTML(rtn[r].Text)
-			// 	if r == 0 {
-			// 		pghead.MetaAuthor = rtn[r].MetaAuthorName
-			// 		pghead.MetaDesc = rtn[r].MetaDesc
-			// 		pghead.MetaKeyWords = rtn[r].MetaKeyWords
-			// 		pghead.Title = rtn[r].Title
-			// 	}
-			// }
-			// fmt.Print("ModifiedDate: ")
-			// fmt.Println(rtn[r].ModifiedDate)
-			// fmt.Print("ModifiedDate.Year: ")
-			// fmt.Println(rtn[r].ModifiedDate.Year())
 			if rtn[r].ModifiedDate.Year() != 1 {
 				rtn[r].UseModifiedDate = true
 			}
 		}
 	}
-	//fmt.Println(gURL)
-	//resp, err := http.Get(gURL)
-	//fmt.Print("get category list")
-	// req, rErr := http.NewRequest("GET", gURL, nil)
-	// if rErr != nil {
-	// 	fmt.Print("request err: ")
-	// 	fmt.Println(rErr)
-	// } else {
-	// 	req.Header.Set("u-client-id", c.ClientID)
-	// 	req.Header.Set("clientId", c.ClientID)
-	// 	req.Header.Set("u-api-key", c.APIKey)
-	// 	client := &http.Client{}
-	// 	resp, cErr := client.Do(req)
-	// 	if cErr != nil {
-	// 		fmt.Print("Content Service read err: ")
-	// 		fmt.Println(cErr)
-	// 	} else {
-	// 		defer resp.Body.Close()
-	// 		//var cont = new(Content)
-	// 		decoder := json.NewDecoder(resp.Body)
-	// 		error := decoder.Decode(&rtn)
-	// 		if error != nil {
-	// 			log.Println(error.Error())
-	// 		}
-	// 		for r := range rtn {
-	// 			txt, err := b64.StdEncoding.DecodeString(rtn[r].Text)
-	// 			if err != nil {
-	// 				fmt.Println(err)
-	// 			} else {
-	// 				rtn[r].Text = string(txt)
-	// 				//fmt.Println(rtn[r].Text)
-	// 				rtn[r].TextHTML = template.HTML(rtn[r].Text)
-	// 				if r == 0 {
-	// 					pghead.MetaAuthor = rtn[r].MetaAuthorName
-	// 					pghead.MetaDesc = rtn[r].MetaDesc
-	// 					pghead.MetaKeyWords = rtn[r].MetaKeyWords
-	// 					pghead.Title = rtn[r].Title
-	// 				}
-	// 			}
-	// 			//fmt.Println(rtn[r].ModifiedDate.Year())
-	// 			if rtn[r].ModifiedDate.Year() != 1 {
-	// 				rtn[r].UseModifiedDate = true
-	// 			}
-	// 		}
-	// 	}
-	// }
 	return pghead, &rtn
 }
 
@@ -453,34 +209,6 @@ func (c *ContentService) DeleteContent(id string) *Response {
 		code := cm.ProcessServiceCall(reqd, &rtn)
 		rtn.Code = code
 	}
-	//fmt.Println(gURL)
-	// req, rErr := http.NewRequest("DELETE", gURL, nil)
-	// if rErr != nil {
-	// 	fmt.Print("request err: ")
-	// 	fmt.Println(rErr)
-	// } else {
-	// 	req.Header.Set("Content-Type", "application/json")
-	// 	req.Header.Set("Authorization", "Bearer "+c.Token)
-	// 	req.Header.Set("u-client-id", c.ClientID)
-	// 	req.Header.Set("clientId", c.ClientID)
-	// 	req.Header.Set("userId", c.UserID)
-	// 	req.Header.Set("hashed", c.Hashed)
-	// 	req.Header.Set("u-api-key", c.APIKey)
-	// 	client := &http.Client{}
-	// 	resp, cErr := client.Do(req)
-	// 	if cErr != nil {
-	// 		fmt.Print("Content Service delete err: ")
-	// 		fmt.Println(cErr)
-	// 	} else {
-	// 		defer resp.Body.Close()
-	// 		decoder := json.NewDecoder(resp.Body)
-	// 		error := decoder.Decode(&rtn)
-	// 		if error != nil {
-	// 			log.Println(error.Error())
-	// 		}
-	// 		rtn.Code = resp.StatusCode
-	// 	}
-	// }
 	return rtn
 }
 

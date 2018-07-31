@@ -2,11 +2,7 @@ package services
 
 import (
 	cm "UlboraCmsAdmin/common"
-	//"bytes"
 	b64 "encoding/base64"
-	//"encoding/json"
-	//"fmt"
-	//"log"
 	"net/http"
 	"strings"
 )
@@ -59,9 +55,7 @@ type ImageResponse struct {
 func (i *ImageService) AddImage(image *UploadedFile) *ImageResponse {
 	var rtn = new(ImageResponse)
 	var addURL = i.Host + "/rs/image/add"
-
 	s64 := b64.StdEncoding.EncodeToString(image.FileData)
-
 	igf := new(imageFile)
 	igf.FileData = s64
 	igf.Name = stripSpace(image.Name)
@@ -78,39 +72,6 @@ func (i *ImageService) AddImage(image *UploadedFile) *ImageResponse {
 		code := cm.ProcessServiceCall(req, &rtn)
 		rtn.Code = code
 	}
-
-	// aJSON, err := json.Marshal(igf)
-	// if err != nil {
-	// 	fmt.Println(err)
-	// } else {
-	// req, rErr := http.NewRequest("POST", addURL, bytes.NewBuffer(aJSON))
-	// if rErr != nil {
-	// 	fmt.Print("request err: ")
-	// 	fmt.Println(rErr)
-	// } else {
-	// 	req.Header.Set("Content-Type", "application/json")
-	// 	req.Header.Set("Authorization", "Bearer "+i.Token)
-	// 	req.Header.Set("u-client-id", i.ClientID)
-	// 	req.Header.Set("clientId", i.ClientID)
-	// 	req.Header.Set("u-api-key", i.APIKey)
-	// 	//req.Header.Set("userId", i.UserID)
-	// 	//req.Header.Set("hashed", i.Hashed)
-	// 	client := &http.Client{}
-	// 	resp, cErr := client.Do(req)
-	// 	if cErr != nil {
-	// 		fmt.Print("Image Add err: ")
-	// 		fmt.Println(cErr)
-	// 	} else {
-	// 		defer resp.Body.Close()
-	// 		decoder := json.NewDecoder(resp.Body)
-	// 		error := decoder.Decode(&rtn)
-	// 		if error != nil {
-	// 			log.Println(error.Error())
-	// 		}
-	// 		rtn.Code = resp.StatusCode
-	// 	}
-	// }
-	//}
 	return rtn
 }
 
@@ -127,34 +88,6 @@ func (i *ImageService) GetList() *[]Image {
 		req.Header.Set("u-api-key", i.APIKey)
 		cm.ProcessServiceCall(req, &rtn)
 	}
-
-	// req, rErr := http.NewRequest("GET", gURL, nil)
-	// if rErr != nil {
-	// 	fmt.Print("request err: ")
-	// 	fmt.Println(rErr)
-	// } else {
-	// 	req.Header.Set("Authorization", "Bearer "+i.Token)
-	// 	req.Header.Set("u-client-id", i.ClientID)
-	// 	req.Header.Set("clientId", i.ClientID)
-	// 	req.Header.Set("u-api-key", i.APIKey)
-	// 	//req.Header.Set("userId", m.UserID)
-	// 	//req.Header.Set("hashed", m.Hashed)
-	// 	client := &http.Client{}
-	// 	resp, cErr := client.Do(req)
-	// 	if cErr != nil {
-	// 		fmt.Print("image list get err: ")
-	// 		fmt.Println(cErr)
-	// 	} else {
-	// 		defer resp.Body.Close()
-	// 		decoder := json.NewDecoder(resp.Body)
-	// 		//fmt.Print("resp body: ")
-	// 		//fmt.Println(resp.Body)
-	// 		error := decoder.Decode(&rtn)
-	// 		if error != nil {
-	// 			log.Println(error.Error())
-	// 		}
-	// 	}
-	// }
 	return &rtn
 }
 
@@ -173,34 +106,6 @@ func (i *ImageService) DeleteImage(id string) *ImageResponse {
 		code := cm.ProcessServiceCall(req, &rtn)
 		rtn.Code = code
 	}
-
-	// req, rErr := http.NewRequest("DELETE", gURL, nil)
-	// if rErr != nil {
-	// 	fmt.Print("request err: ")
-	// 	fmt.Println(rErr)
-	// } else {
-	// 	req.Header.Set("Content-Type", "application/json")
-	// 	req.Header.Set("Authorization", "Bearer "+i.Token)
-	// 	req.Header.Set("u-client-id", i.ClientID)
-	// 	req.Header.Set("clientId", i.ClientID)
-	// 	req.Header.Set("u-api-key", i.APIKey)
-	// 	//req.Header.Set("userId", i.UserID)
-	// 	//req.Header.Set("hashed", i.Hashed)
-	// 	client := &http.Client{}
-	// 	resp, cErr := client.Do(req)
-	// 	if cErr != nil {
-	// 		fmt.Print("Image Service delete err: ")
-	// 		fmt.Println(cErr)
-	// 	} else {
-	// 		defer resp.Body.Close()
-	// 		decoder := json.NewDecoder(resp.Body)
-	// 		error := decoder.Decode(&rtn)
-	// 		if error != nil {
-	// 			log.Println(error.Error())
-	// 		}
-	// 		rtn.Code = resp.StatusCode
-	// 	}
-	// }
 	return rtn
 }
 

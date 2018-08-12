@@ -52,7 +52,7 @@ func main() {
 
 	router.PathPrefix("/").Handler(http.FileServer(http.Dir("./static/")))
 
-	fmt.Println("Online Account Creator!")
+	fmt.Println("Ulbora CMS Admin!")
 	fmt.Println("Listening on :8060...")
 	http.ListenAndServe(":8060", router)
 
